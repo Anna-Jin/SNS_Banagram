@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+#wrap {
+	background-color: #f6f6f6;
+	height: 600px;
+/* 	width: 1200px; */
+}
+
+/* login */
+.login-box {
+	height: 350px;
+	width: 350px;	
+	background-color: #fff;
+	border: 1px solid rgb(190, 190, 190);
+}
+
+.signup-btn-box, .login-btn-box {
+	height: 60px;
+	width: 350px;
+	background-color: #fff;
+	border: 1px solid rgb(190, 190, 190);
+	font-size: 14px;
+}
+.login, .sign-up {
+	width: 250px;
+}
+
+.registration-input-style {
+	position: relative;
+	font-size: 13px;
+	background-color: rgb(246, 246, 246);
+	padding: 18px;
+
+}
+.check {
+	background-image: url(/images/check-mark.png);
+	background-position: 210px center;
+	background-repeat: no-repeat;
+}
+.cross {
+	background-image: url(/images/cross.png);
+	background-position: 210px center;
+	background-repeat: no-repeat;
+}
+
+.registration-btn {
+	background-color: rgb(52, 152, 219);
+	color: #fff;
+}
+.registration-btn:hover {
+	color: #fff;
+}
+
+a {
+	color: rgb(52, 152, 219);
+}
+a:hover {
+	color: rgb(52, 152, 219);
+	text-decoration: none;
+}
+
+/* sign up */
+.sign-up-box {
+	height: 450px;
+	width: 350px;	
+	background-color: #fff;
+	border: 1px solid rgb(190, 190, 190);
+}
+
+/* footer */
+.footer {
+	color: rgb(158, 158, 158);
+	font-size: 11px;
+}
