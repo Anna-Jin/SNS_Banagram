@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-	@RequestMapping("/signup")
+	@RequestMapping("/signup-view")
 	public String singUp(Model model) {
 		model.addAttribute("viewPath", "sign_up");
 		return "template/registration_layout";
 	}
 	
-	@RequestMapping("/signin")
+	@RequestMapping("/login-view")
 	public String singIn(Model model) {
 		
 		model.addAttribute("viewPath", "sign_in");

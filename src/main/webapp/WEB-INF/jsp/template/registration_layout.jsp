@@ -25,8 +25,6 @@
 			</footer>
 		</div>
 	</div>
-	
-	<script type="text/javascript" src="/js/markup_script.js"></script>
-	<script type="text/javascript" src="/js/ajax_script.js"></script>
+
 </body>
 </html>
