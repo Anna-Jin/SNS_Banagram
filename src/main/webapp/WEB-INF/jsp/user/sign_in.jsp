@@ -23,7 +23,7 @@
 			<div class="h-100 d-flex justify-content-center align-items-center">
 				<div class="signup-btn">
 					<span class="">계정이 없으신가요?</span>
-					<a href="/user/signup">가입하기</a>
+					<a href="/user/signup-view">가입하기</a>
 				</div>
 			</div>	
 		</div>

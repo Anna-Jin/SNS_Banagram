@@ -9,17 +9,18 @@
 				<img alt="banagram" src="/images/banagram_logo.png" class="mt-3">
 			</div>
 			<div>
-				<div>	
-				<input type="text" id="email" name="email" class="form-control area registration-input-style mb-2" placeholder="이메일 주소">
+				<div class="d-flex align-items-center">	
+					<input type="text" id="email" name="email" class="form-control email-area registration-input-style mb-2" placeholder="이메일 주소">
+					<!-- <button type="button" id="duplication-chk-btn" class="btn mb-2 ml-2">중복확인</button> -->
 				</div>
 				<div>
-				<input type="text" id="name" name="name" class="form-control area registration-input-style mb-2" placeholder="성명">
+					<input type="text" id="name" name="name" class="form-control name-area registration-input-style mb-2" placeholder="성명">
 				</div>
 				<div>
-				<input type="text" id="id" name="loginId" class="form-control area registration-input-style mb-2" placeholder="사용자 이름">
+					<input type="text" id="id" name="loginId" class="form-control loginId-area registration-input-style mb-2" placeholder="사용자 이름">
 				</div>
 				<div>
-				<input type="password" id="password" name="password" class="form-control area registration-input-style" placeholder="비밀번호">
+					<input type="password" id="password" name="password" class="form-control password-area registration-input-style" placeholder="비밀번호">
 				</div>
 			</div>
 			<div>	
@@ -34,7 +35,7 @@
 		<div class="h-100 d-flex justify-content-center align-items-center">
 			<div class="login-btn">
 				<span>계정이 있으신가요?</span>
-				<a href="/user/signin">로그인</a>
+				<a href="/user/login-view">로그인</a>
 			</div>
 		</div>	
 	</div>
@@ -43,35 +44,73 @@
 
 <script>
 $(document).ready(function(e) {
-	// mark-up
 	
-	// area 클래스를 가진 input 태그를 제외한 부분을 클릭하면 이벤트 발 	
-	$('html').on('click', function(e) {
-		if (!$(e.target).hasClass('area')) {
+	// email 창 외의 부분을 클릭했을 때, 중복확인	
+	$('body').on('click', function(e) {
+		if (!$(e.target).hasClass('email-area')) {
 			
+			let email = $('#email').val().trim();
+			
+			if (!email.includes('@')) {
+				$('#email').removeClass('check');
+				$('#email').addClass('cross');
+				return;
+			};
+			
+			$.ajax({ // addClass가 input값이 변경되야 실행되는 에러 수정하기
+				url: "/user/duplicate-email"
+				, data: {"email":email}
+				, success: function(data) {
+					if (data.result) {
+			 			// 중복인 경우 -> 이미 사용 중인 아이디
+			 			$('#email').removeClass('check');
+						$('#email').addClass('cross');
+			 		
+					} else if (data.result == false) {
+						// 아닌 경우 -> 사용 가능한 아이디
+						$('#email').removeClass('cross');
+						$('#email').addClass('check');
+					}
+				}
+				, error: function(e) {
+					alert("이메일 중복 확인에 실패했습니다. 관리자에게 문의해주세요.")
+				}
+					
+			});
 		};
-	});
+	}); 
 	
-	// email에 key가 입력되면 check 클래스를 추가하고
-	// email이 비었다면 cross 클래스 추가
-	$('#email').keyup(function() {
-		$(this).removeClass('cross');
-		$(this).addClass('check');
+	// loginId 창 외의 부분을 클릭했을 때, 중복확인
+	$('body').on('click', function(e) {
+		if (!$(e.target).hasClass('loginId-area')) {
+			
+			let loginId = $('#id').val().trim();
+			
+			if (loginId == '') {
+				$('#id').removeClass('check');
+				$('#id').addClass('cross');
+				return;
+			}
 		
-		if ($(this).val() == '') {
-			$(this).removeClass('check');
-			$(this).addClass('cross');
-			return;
+			$.ajax({ 
+				url: "/user/duplicate-loginId"
+				, data: {"loginId":loginId}
+				, success: function(data) {
+					if (data.result) {
+				 		// 중복인 경우 -> 이미 사용 중인 아이디
+						$('#id').addClass('cross');
+						} else if (data.result == false) {
+						// 아닌 경우 -> 사용 가능한 아이디
+							$('#id').addClass('check');
+					}
+				}
+				, error: function(e) {
+					alert("아이디 중복 확인에 실패했습니다. 관리자에게 문의해주세요.")
+				}
+					
+			});
 		}
-		
-		// 이메일의 도메인 주소에서 . 뒤에 두글자 이상이면 check 클래스 추가
-		if ($(this).val().split('@')[1].split('.')[1].length < 2) {
-			$(this).removeClass('check');
-			$(this).addClass('cross');
-			return;
-		}
-		
-	});
+	}); 
 	
 	// name에 key가 입력되면 check 클래스를 추가하고
 	// name이 비었다면 cross 클래스 추가
@@ -109,19 +148,20 @@ $(document).ready(function(e) {
 	});
 	
 	
+	
+	// 회원가입 버튼 클릭
 	$('#signUpForm').on('submit', function(e) {
-	e.preventDefault(); // submit 중단
+		e.preventDefault(); // submit 중단
 		
 		// validation check
-		let loginId = $('#id').val().trim();
-		if (loginId == '') {
-			alert("아이디를 입력해주세요");
+		let email = $('#email').val().trim();
+		if (email == '') {
+			alert("이메일을 입력해주세요");
 			return false;
 		}
 		
-		let password = $('#password').val();
-		if (password == '') {
-			alert("비밀번호를 입력해주세요");
+		if ($('#email').hasClass('cross')) {
+			alert("잘못된 이메일입니다.")
 			return false;
 		}
 		
@@ -131,12 +171,45 @@ $(document).ready(function(e) {
 			return false;
 		}
 		
-		let email = $('#email').val().trim();
-		if (email == '') {
-			alert("이메일을 입력해주세요");
+		if ($('#name').hasClass('cross')) {
 			return false;
 		}
 		
+		let loginId = $('#id').val().trim();
+		if (loginId == '') {
+			alert("사용자 이름을 입력해주세요");
+			return false;
+		}
+		
+		if ($('#id').hasClass('cross')) {
+			return false;
+		}
+		
+		let password = $('#password').val();
+		if (password == '') {
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		
+		if ($('#password').hasClass('cross')) {
+			return false;
+		}
+		
+		
+		// AJAX로 보내기 
+		let url = $(this).attr('action');
+		
+		let params = $(this).serialize();
+		
+		$.post(url, params)
+		.done(function(data) {
+			if (data.result == 'success') {
+				alert("가입을 환영합니다. 로그인을 해주세요");
+				location.href = "/user/login-view";
+			} else {
+				alert("회원가입에 실패했습니다. 다시 시도해주세요.")
+			}
+		});
 	});
 });
 
