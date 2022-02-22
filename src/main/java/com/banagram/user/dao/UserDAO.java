@@ -3,6 +3,8 @@ package com.banagram.user.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.banagram.user.model.User;
+
 @Repository
 public interface UserDAO {
 
@@ -16,4 +18,8 @@ public interface UserDAO {
 			@Param("name") String name,
 			@Param("loginId") String loginId,
 			@Param("password") String password);
+	
+	public User selectUserByLoginIdPassword(
+			@Param("loginId") String loginId
+			,@Param("password") String password);
 }

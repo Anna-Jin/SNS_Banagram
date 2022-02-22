@@ -3,7 +3,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sns_banagram?characterEncoding=UTF-8
     username: root
-    password: cz_hyy6848
+    password: root
   mvc:
     view:
       prefix: /WEB-INF/jsp/

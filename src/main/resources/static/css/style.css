@@ -61,6 +61,10 @@ a:hover {
 	text-decoration: none;
 }
 
+.validation-loginId, .validation-password {
+	font-size: 12px;
+}
+
 /* sign up */
 .sign-up-box {
 	height: 450px;
