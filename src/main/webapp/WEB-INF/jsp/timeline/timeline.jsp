@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<section class="content d-flex">
+<section class="content d-flex justify-content-between container">
 	<div class="timeline-box">
 		<div class="post">
 			<div class="post-header">
@@ -13,7 +13,19 @@
 			<div class="image">
 				<img alt="post-img" src="/images/post-img1.jpeg" class="image">
 			</div>
-			<div class="post-icon"></div>
+			<div class="post-icon-box d-flex justify-content-between">
+				<div class="col-4 p-0">
+					<img src="/images/like-black.png" class="post-icon-like">
+					<img src="/images/comment.png" class="post-icon">
+				</div>
+				<div class="col-4 p-0 d-flex justify-content-center">
+					<%-- 이미지 개수에 따라 버튼개수 가감 --%>
+					<div class="img-list-btn"></div>
+				</div>
+				<div class="col-4 p-0 d-flex justify-content-end">
+					<img src="/images/bookmark.png" class="post-icon">
+				</div>
+			</div>
 			<div>
 				<div>좋아요 14,221개</div>
 				<div>
