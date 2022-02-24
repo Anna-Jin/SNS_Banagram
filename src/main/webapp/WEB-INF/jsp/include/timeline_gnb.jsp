@@ -9,8 +9,11 @@
  	</div>
  	<div class="icon-box">
  		<a href="#"><img src="/images/main_full.png" alt="main_icon" class="nav-icon"></a>
- 		<a href="#"><img src="/images/post.png" alt="main_icon" class="nav-icon"></a>
+ 		<button><img src="/images/post.png" alt="main_icon" class="nav-icon create-post-btn"></button>
  		<a href="#"><img src="/images/like-black.png" alt="main_icon" class="nav-icon"></a>
  		<a href="#"><img src="/images/user.png" alt="main_icon" class="nav-icon"></a>
  	</div>
 </div>
+
+
+<jsp:include page="../post/post_modal.jsp" />
