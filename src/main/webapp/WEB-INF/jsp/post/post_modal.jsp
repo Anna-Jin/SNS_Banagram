@@ -8,7 +8,7 @@
 				<div class="title-box">
 					<div class="title-font">새 게시물 만들기</div>
 				</div>
-				<a href="#" class="submit-btn">공유하기</a>
+				<button type="button" class="submit-btn">공유하기</button>
 			</div>
 		</div>
 		<div class="creat-content-box d-flex">
@@ -24,7 +24,7 @@
 			<div class="col-4 p-3">
 				<div class="post-box d-flex align-items-center mb-4">
 					<div class="profile-img-box">
-						<img alt="profile" src="/images/profile-img1.jpeg"
+						<img alt="profile" src="/image/profile-img1.jpeg"
 							class="profile-img">
 					</div>
 					<div class="d-flex justify-content-between w-100">
@@ -61,10 +61,11 @@
 			});
 			
 			$('#file').on('change', function(e) {
-				let fileName = e.target.files[0].name;
+				let file = e.target.files[0].name;
+				
 				
 				// 확장자 유효성 확인
-				let extension = fileName.split('.');
+				let extension = file.split('.');
 				if (extension.length < 2 || 
 				 	(extension[extension.length - 1] != 'gif' 
 				 	&& extension[extension.length - 1] != 'png' 
@@ -77,24 +78,56 @@
 				 	return;
 				 }
 				 
-				 $("#fileName").text(fileName);
+				 $("#fileName").text(file);
 			});
 			
 			// 글 내용 포스팅
-			$('#save-btn').on('click', function(e) {
-				let fileName = e.target.files[0].name;
-				if (fileName == '') {
+			$('.submit-btn').on('click', function(e) {
+				
+				
+				let file = $('#file').val();
+				// 파일 업로드 유효성 체크
+				if (file == '') {
 					alert('사진을 업로드해주세요');
 					return;
 				}
 				
+				let fileName = $('#fileName').val();
 				// 파일이 업로드 된 경우, 확장자 체크
-				let file = $('#file').val();
-				if (file != '') {
-					let ext = file.split('.')
+				if (fileName != '') {
+					let ext = file.split('.').pop().toLowerCase();
+					if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+						alert('jpg, jpeg, png, gif 파일만 업로드 할 수 있습니다.');
+						$('#file').val(''); // 파일을 비운다
+						return;
+					}
+				}
+				
+			//file은 무조건 form형태로 보내야한다.
+			let formData = new FormData();
+			formData.append("file", $('#file')[0].files[0]);
+			formData.append("content", $('.text-content').val());
+			
+			$.ajax({
+				type: "POST"
+				, url: "/post/write"
+				, data: formData
+				, enctype: "multipart/form-data"   	// 파일 업로드를 위한 필수 설정
+				, processData: false   				// 파일 업로드를 위한 필수 설정
+				, contentType: false
+				, success: function(data) {
+					if (data.result == 'success') {
+						location.href = "/timeline"
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert("메모 저장에 실패했습니다. 관리자에게 문의해주세요.");
 				}
 			});
-
+			});
+			
 			
 		});
 	</script>

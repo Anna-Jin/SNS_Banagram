@@ -35,7 +35,7 @@
 				<jsp:include page="../include/timeline_gnb.jsp" />
 			</nav>
 			<div class="d-flex justify-content-center">
-				<jsp:include page="../timeline/timeline.jsp" />
+				<jsp:include page="../${viewPath}.jsp" />
 			</div>
 		</section>
 	</div>

@@ -6,7 +6,7 @@
 	<div class="sign-up-box d-flex justify-content-center mb-4">
 		<div class="sign-up d-flex flex-column justify-content-around mt-3">
 			<div class="d-flex justify-content-center">	
-				<img alt="banagram" src="/images/banagram_logo.png" class="mt-3">
+				<img alt="banagram" src="/image/banagram_logo.png" class="mt-3">
 			</div>
 			<div>
 				<div class="d-flex align-items-center">	

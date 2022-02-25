@@ -6,7 +6,7 @@
 		<div class="login-box d-flex justify-content-center mb-4">
 			<div class="login d-flex flex-column justify-content-around mt-3">
 				<div class="d-flex justify-content-center">	
-					<img alt="banagram" src="/images/banagram_logo.png" class="mt-3">
+					<img alt="banagram" src="/image/banagram_logo.png" class="mt-3">
 				</div>
 				<div class="mt-4">	
 					<input type="text" id="loginId" name="loginId" class="form-control registration-input-style mb-2" placeholder="사용자 이름 또는 이메일 주소">

@@ -34,6 +34,11 @@ public class UserController {
 		return "template/registration_layout";
 	}
 	
+	/**
+	 * 로그아웃
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/logout")
 	public String logOut(HttpServletRequest request) {
 		request.removeAttribute("userLoginId");
