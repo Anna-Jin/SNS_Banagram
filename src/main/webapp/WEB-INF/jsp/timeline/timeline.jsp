@@ -16,7 +16,7 @@
 					<div class="d-flex justify-content-between w-100">
 						<div>
 							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
-							<div class="text-style-15-bold">포스팅한 사용자 아이디</div>
+							<div class="text-style-15-bold">${post.userId}</div>
 						</div>
 						<div>
 							<button type="button">
