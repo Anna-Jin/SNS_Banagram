@@ -14,7 +14,14 @@
  		<button><img src="/image/post.png" alt="main_icon" class="nav-icon create-post-btn"></button>
  		<a href="#"><img src="/image/like-black.png" alt="main_icon" class="nav-icon"></a>
  		<c:if test="${not empty userName}">
- 			<a href="#"><img src="/image/user.png" alt="main_icon" class="nav-icon"></a>
+ 			<c:choose>
+ 				<c:when test="${not empty profileImageUrl}">
+ 					<a href="#"><img src="/image/user.png" alt="main_icon" class="nav-icon"></a>
+ 				</c:when>
+ 				<c:otherwise>
+ 					<a href="#"><img src="/image/user.png" alt="main_icon" class="nav-icon"></a>
+ 				</c:otherwise>	
+ 			</c:choose>
  		</c:if>	
  	</div>
 </div>

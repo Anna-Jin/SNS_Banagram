@@ -4,7 +4,7 @@
 
 <section class="content d-flex justify-content-between container">
 	<div class="timeline-box">
-		<c:forEach items="${postList}" var="post">
+		<c:forEach items="${contentList}" var="content">
 			<div class="post">
 				<%-- 포스트 헤더 부분 --%>
 				<div class="post-header">
@@ -16,7 +16,7 @@
 					<div class="d-flex justify-content-between w-100">
 						<div>
 							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
-							<div class="text-style-15-bold">${post.userId}</div>
+							<div class="text-style-15-bold">${content.userLoginId}</div>
 						</div>
 						<div>
 							<button type="button">
@@ -28,7 +28,7 @@
 
 				<%-- 포스팅한 이미지 --%>
 				<div class="image">
-					<img alt="post-img" src="${post.imagePath}" class="image">
+					<img alt="post-img" src="${content.imagePath}" class="image">
 				</div>
 				<div class="content-box">
 					<%-- 좋아요, 댓글, 태그아이콘 부분 --%>
@@ -54,17 +54,22 @@
 					<div class="post-content">
 						<div class="text-style-15-bold mb-2 mt-2">좋아요 14,221개</div>
 						<div class="d-flex">
-							<div class="text-style-15-bold mr-2 mb-1">사용자 이름(loginId)</div>
-							<div>${post.content}</div>
+							<div class="text-style-15-bold mr-2 mb-1">${content.userLoginId}</div>
+							<div>${content.content}</div>
 							<%-- 내용이 n자 이상이면 내용을 숨기고 ... 더보기 버튼 표시 --%>
 							<div class="d-flex">
 								<div>...</div>
-								<a type="button" id="more">더보기</a>
+								<a type="button" id="more">더보기(구현 중)</a>
 							</div>
+						</div>
+						<%-- 댓글 뿌려지는 모습을 확인하기 위해 우선 만들고 나중에 게시글보기 창 완성되면 거기에 추 --%>
+						<div class="d-flex align-items-cetner">
+							<div class="text-style-15-bold mr-2 mb-1">hello-world</div>
+							<div>댓글내용</div>
 						</div>
 						<div>
 							<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
-							<a type="button" id="text-style-14-gray">댓글 n개 모두 보기</a>
+							<a type="button" id="text-style-14-gray">댓글 n개 모두 보기(구현 중)</a>
 						</div>
 					</div>
 
@@ -72,8 +77,8 @@
 					<div class="post-comment">
 						<div class="d-flex align-items-center h-100">
 							<img src="/image/comment.png" class="post-icon ml-3">
-							<input type="text" id="commentText${post.id}" class="comment-input ml-3 mr-3" placeholder="댓글 달기...">
-							<button type="button" class="commentBtn btn btn-light" data-post-id="${post.id}">게시</button>
+							<input type="text" id="commentText${content.id}" class="comment-input ml-3 mr-3" placeholder="댓글 달기...">
+							<button type="button" class="commentBtn btn btn-light" data-post-id="${content.id}">게시</button>
 						</div>
 					</div>
 				</div>
@@ -102,11 +107,30 @@
 $(document).ready(function(e) {
 	// 댓글쓰기
 	$('.commentBtn').on('click', function(e) {
-		let postId = $(this).data('post-id'); // data-post-id
-		alert(postId);
+		e.preventDefault(); //기본기능 중단
 		
+		let postId = $(this).data('post-id'); // data-post-id
 		let commentContent = $('#commentText' + postId).val().trim();
-		alert(commentContent);
+		if(commentContent == '') {
+			alert("댓글 내용을 입력해주세요");
+			return;
+		}
+		
+		$.ajax({
+			type: "POST"
+			, url: "/comment/write"
+			, data: {"postId":postId, "content": commentContent}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert("댓글 쓰기에 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
 	});
 });
 

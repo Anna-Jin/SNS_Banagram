@@ -1,14 +1,14 @@
-package com.banagram.post.model;
+package com.banagram.comment.model;
 
 import java.util.Date;
 
-public class Post {
+public class Comment {
 	private int id;
 	private int userId;
 	private String userLoginId;
-	private String imagePath;
-	private String content;
-	private Date createdAt;
+	private int postId;
+	private String comment;
+	private Date creadtedAt;
 	private Date updatedAt;
 	
 	public int getId() {
@@ -29,23 +29,23 @@ public class Post {
 	public void setUserLoginId(String userLoginId) {
 		this.userLoginId = userLoginId;
 	}
-	public String getImagePath() {
-		return imagePath;
+	public int getPostId() {
+		return postId;
 	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
-	public String getContent() {
-		return content;
+	public String getComment() {
+		return comment;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
-	public Date getCreatedAt() {
-		return createdAt;
+	public Date getCreadtedAt() {
+		return creadtedAt;
 	}
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+	public void setCreadtedAt(Date creadtedAt) {
+		this.creadtedAt = creadtedAt;
 	}
 	public Date getUpdatedAt() {
 		return updatedAt;

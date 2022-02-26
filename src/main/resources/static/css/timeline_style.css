@@ -9,7 +9,7 @@ button {
 	padding: 0;
 	outline: none !important; 
 	border: 0;
-	background-color: #fff
+	background-color: #fff;
 }
 
 /* nav */
@@ -203,6 +203,21 @@ nav {
 	height: 100%;
 }
 
+.commentBtn {
+	width: 100px;
+	outline: 0;
+	border: 0;
+}
+
+.commentBtn:focus {
+	outline: 0;
+	border: 0;
+}
+
+.commentBtn:hover {
+	outline: 0;
+	border: 0;
+}
 
 
 /* footer */

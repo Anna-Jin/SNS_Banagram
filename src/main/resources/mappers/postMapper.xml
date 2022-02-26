@@ -6,17 +6,20 @@
  		SELECT
  			`id`
 			,`userId`
+			, `userLoginId`
 			,`imagePath`
 			,`content`
 			,`createdAt`
 			,`updatedAt`
 		FROM
-			`post`	
+			`post`
+		ORDER BY `id` DESC
  	</select>
  	<insert id="insertPost" parameterType="map">
  		INSERT INTO `post`
  		(
  			`userId`
+ 			, `userLoginId`
 			,`imagePath`
 			,`content`
 			,`createdAt`
@@ -25,6 +28,7 @@
  		VALUES
  		(
  			#{userId}
+ 			, #{userLoginId}
  			, #{imagePath}
  			, #{content}
  			, NOW()

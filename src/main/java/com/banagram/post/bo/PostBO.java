@@ -29,8 +29,6 @@ public class PostBO {
 			imagePath = fileManager.savaFile(userLoginId, file);
 		}
 		
-		// insert DAO
-		
-		postDAO.insertPost(userId, imagePath, content);
+		postDAO.insertPost(userId, userLoginId, imagePath, content);
 	}
 }

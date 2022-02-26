@@ -1,4 +1,4 @@
-package com.banagram.timeline;
+package com.banagram.comment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,40 +11,44 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.banagram.post.bo.PostBO;
+import com.banagram.comment.bo.CommentBO;
 
 @RestController
-@RequestMapping("/post")
-public class TimelineRestController {
-
-	@Autowired
-	private PostBO postbo;
+@RequestMapping("/comment")
+public class CommentRestController {
 	
-	@PostMapping("/write")
-	public Map<String, Object> addPost(
-			@RequestParam("file") MultipartFile file,
+	@Autowired
+	private CommentBO commentBO;
+	
+	@PostMapping("write")
+	public Map<String, Object> write(
+			@RequestParam("postId") int postId,
 			@RequestParam("content") String content,
 			HttpServletRequest request
 			) {
 		
 		Map<String, Object> result = new HashMap<>();
-		result.put("result", "success");
 		
+		// 로그인 시에만 댓글작성 가능하게 하기
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
-		
-		if (userId == null) {
+		if (userId == null || userLoginId == null) {
 			result.put("result", "error");
-			result.put("errorMessage", "로그인 후 사용가능합니다.");
+			result.put("errorMessage", "[댓글쓰기] 로그인 세션이 없습니다.");
 			return result;
 		}
 		
-		// db에 insert
-		postbo.addPost(userId, userLoginId, file, content);
-		
+		// insert DB
+		int row = commentBO.writeComment(userId, userLoginId, postId, content);
+		if (row > 0) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "error");
+			result.put("errorMessage", "[댓글쓰기] 댓글쓰기 중 실패하였습니다.");
+		}
 		return result;
 	}
+
 }

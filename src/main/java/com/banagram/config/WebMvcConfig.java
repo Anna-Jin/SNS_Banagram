@@ -14,6 +14,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry
 		.addResourceHandler("/images/**") // http://localhost/images/appletree066_1632141241/sun.png 이런 형식으로 만든다
-		.addResourceLocations("file:///D:\\진유진_java\\6_spring-project\\memo\\workspace\\images/"); // 실제 파일 저장 위치
+		.addResourceLocations("/Users/jin-yujin/Desktop/yujin/megaIT/SNS_Banagram/workspace/images/"); // 실제 파일 저장 위치
 	}
 }

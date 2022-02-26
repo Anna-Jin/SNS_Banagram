@@ -29,7 +29,7 @@
 					</div>
 					<div class="d-flex justify-content-between w-100">
 						<div>
-							<div class="text-style-15-bold">포스팅한 사용자 아이디</div>
+							<div class="text-style-15-bold">${userLoginId}</div>
 						</div>
 					</div>
 				</div>

@@ -113,7 +113,6 @@ public class UserRestController {
 		
 		// 결과 JSON리턴
 		Map<String, Object> result = new HashMap<>();
-		result.put("result", "success");
 		
 		if (user != null) {
 			// session에 로그인 정보 저장 (로그인 상태 유지)
@@ -121,6 +120,8 @@ public class UserRestController {
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
+			
+			result.put("result", "success");
 		} else {
 			result.put("errorMessage", "존재하지 않는 사용자입니다. 관리자에게 문의해주세요.");
 		}
