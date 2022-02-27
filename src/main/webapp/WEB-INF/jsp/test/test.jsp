@@ -52,8 +52,6 @@
 		</ul>
 	</div>
 	
-	
-	sdkfaldfkj;aldkfj;lakjfa;dk
 
 	<script>
 	$(document).ready(function() {
