@@ -11,6 +11,8 @@ import com.banagram.comment.model.Comment;
 import com.banagram.post.bo.PostBO;
 import com.banagram.post.model.Post;
 import com.banagram.timeline.model.ContentView;
+import com.banagram.user.bo.UserBO;
+import com.banagram.user.model.User;
 
 @Service
 public class ContentBO {
@@ -20,6 +22,9 @@ public class ContentBO {
 	
 	@Autowired
 	private CommentBO commentBO;
+	
+	@Autowired
+	private UserBO userBO;
 //	
 //	@Autowired
 //	private LikeBO likeBO;
@@ -39,6 +44,10 @@ public class ContentBO {
 			// ContentView 모델에 댓글 집어넣기
 			List<Comment> commentList = commentBO.getCommentList(post.getId());
 			contentView.setCommentList(commentList);
+			
+			// ContentView 모델에 프로필사진 집어넣기
+			User user = userBO.getUserByUserId(post.getUserId());
+			contentView.setUser(user);
 			
 			contentList.add(contentView);
 		}

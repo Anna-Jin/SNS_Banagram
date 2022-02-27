@@ -25,6 +25,7 @@
 <!--  css -->
 <link rel="stylesheet" type="text/css" href="/css/timeline_style.css">
 <link rel="stylesheet" type="text/css" href="/css/modal_style.css">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
 <!--  fontawesome -->
 <script src="https://kit.fontawesome.com/6c0fa0c849.js" crossorigin="anonymous"></script>
 </head>

@@ -45,6 +45,6 @@ public class UserController {
 		request.removeAttribute("userName");
 		request.removeAttribute("userId");
 		
-		return "redirect:/user/singin-view";
+		return "redirect:/user/login-view";
 	}
 }

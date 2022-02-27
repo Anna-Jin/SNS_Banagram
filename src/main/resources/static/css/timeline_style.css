@@ -91,8 +91,27 @@ nav {
 }
 
 .nav-icon {
-	width: 30px;
-	margin-left: 20px;
+	width: 24px;
+	padding: 0;
+}
+
+.hr {
+	border-bottom: 1px solid rgb(190, 190, 190);
+}
+
+.dropdown-menu {
+	padding: 0;
+	margin: 0;
+}
+
+.dropdown-item {
+	padding: 12px;
+}
+.dropdown-item:active {
+	background-color: #fff
+}
+.dropdown-item:hover {
+	color: #000;
 }
 
 /* content */
@@ -110,27 +129,6 @@ nav {
 	align-items: center;
 }
 
-.profile-img-box {
-	position: relative;
-	width: 56px;
-	height: 56px;
-	border: 3px solid transparent;
-	border-radius: 50%;
-	background-image: linear-gradient(#fff, #fff), linear-gradient(to left bottom, red 0%, orange 100%);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-origin: border-box;
-	background-clip: content-box, border-box;
-	margin-right: 10px;
-}
-
-
-.profile-img {
-	width: 48px;
-	height: 48px;
-	border-radius: 50%; 
-}	
 	
 .image { 
 	width : 615px;
@@ -183,11 +181,11 @@ nav {
 	color: rgb(158, 158, 158);
 }
 
-#more {
-	color: rgb(158, 158, 158);
+.more {
+	color: rgb(158, 158, 158) !important;
 }
 
-#more:hover {
+.more:hover {
 	color: rgb(158, 158, 158);
 }
 
@@ -207,17 +205,16 @@ nav {
 	width: 100px;
 	outline: 0;
 	border: 0;
+	background-color: #fff;
 }
 
-.commentBtn:focus {
+.commentBtn:focus, .commentBtn:active, .commentBtn:hover {
 	outline: 0;
 	border: 0;
+	background-color: #fff;
+	box-shadow: none !important;
 }
 
-.commentBtn:hover {
-	outline: 0;
-	border: 0;
-}
 
 
 /* footer */
@@ -227,4 +224,3 @@ nav {
 }
 
 
-/* 글쓰기 창 */

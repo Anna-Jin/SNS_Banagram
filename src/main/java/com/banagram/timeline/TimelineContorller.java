@@ -30,12 +30,8 @@ public class TimelineContorller {
 			return "redirect:user/signin-view";
 		}
 		
-		
 		// 하나의 카드 -> contentview객체 (view용 객체)
 		List<ContentView> contentList = contentBO.generateContentViewList();
-		
-		// 유저 id로 유저 loginId가져오기
-		// List<Comment> commentList ;
 		
 		
 		// model.addAttribute("postList", postList);

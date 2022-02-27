@@ -6,6 +6,10 @@
 /* 	width: 1200px; */
 }
 
+a {
+	color: #000 !important;
+}
+
 /* login */
 .login-box {
 	height: 350px;
@@ -35,12 +39,12 @@
 }
 
 .check {
-	background-image: url(/images/check-mark.png);
+	background-image: url(/image/check-mark.png);
 	background-position: 210px center;
 	background-repeat: no-repeat;
 }
 .cross {
-	background-image: url(/images/cross.png);
+	background-image: url(/image/cross.png);
 	background-position: 210px center;
 	background-repeat: no-repeat;
 }

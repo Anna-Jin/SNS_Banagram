@@ -10,16 +10,24 @@
 				<div class="post-header">
 					<%-- 포스트의 프로필사진과 아이디 --%>
 					<div class="profile-img-box">
-						<img alt="profile" src="/image/profile-img1.jpeg"
-							class="profile-img">
+						<%-- 프로필 이미지를 받아와서 프로필 이미지가 없으면 기본 이미지 노출 --%>
+						<c:choose>
+							<c:when test="${not empty content.user.profileImageUrl}">
+								<img alt="profile" src="/image/profile-img1.jpeg" class="profile-img">
+							</c:when>
+							<c:otherwise>
+								<img alt="profile" src="/image/user.png" class="profile-img">
+							</c:otherwise>
+						</c:choose>
 					</div>
 					<div class="d-flex justify-content-between w-100">
+						<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
 						<div>
-							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
-							<div class="text-style-15-bold">${content.userLoginId}</div>
+							<div class="text-style-15-bold"><a href="#">${content.post.userLoginId}</a></div>
 						</div>
+						<%-- 글 삭제 버튼. 클릭하면 삭제하기 모달 노출 --%>
 						<div>
-							<button type="button">
+							<button type="button" data-toggle="modal" data-target=".del-modal">
 								<i class="fa-lg fa-solid fa-ellipsis mr-1"></i>
 							</button>
 						</div>
@@ -28,7 +36,7 @@
 
 				<%-- 포스팅한 이미지 --%>
 				<div class="image">
-					<img alt="post-img" src="${content.imagePath}" class="image">
+					<img alt="post-img" src="${content.post.imagePath}" class="image">
 				</div>
 				<div class="content-box">
 					<%-- 좋아요, 댓글, 태그아이콘 부분 --%>
@@ -54,31 +62,31 @@
 					<div class="post-content">
 						<div class="text-style-15-bold mb-2 mt-2">좋아요 14,221개</div>
 						<div class="d-flex">
-							<div class="text-style-15-bold mr-2 mb-1">${content.userLoginId}</div>
-							<div>${content.content}</div>
-							<%-- 내용이 n자 이상이면 내용을 숨기고 ... 더보기 버튼 표시 --%>
+							<div class="text-style-15-bold mr-2 mb-1"><a href="#">${content.post.userLoginId}</a></div>
+							<div class="context">${content.post.content}</div>
 							<div class="d-flex">
-								<div>...</div>
-								<a type="button" id="more">더보기(구현 중)</a>
+								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
 							</div>
 						</div>
-						<%-- 댓글 뿌려지는 모습을 확인하기 위해 우선 만들고 나중에 게시글보기 창 완성되면 거기에 추 --%>
-						<div class="d-flex align-items-cetner">
-							<div class="text-style-15-bold mr-2 mb-1">hello-world</div>
-							<div>댓글내용</div>
-						</div>
-						<div>
-							<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
-							<a type="button" id="text-style-14-gray">댓글 n개 모두 보기(구현 중)</a>
-						</div>
+						<%-- 댓글 뿌려지는 모습을 확인하기 위해 우선 만들고 나중에 게시글보기 창 완성되면 거기에 추가하기 --%>
+						<c:forEach items="${content.commentList}" var="comment">
+							<div class="d-flex align-items-cetner">
+								<div class="text-style-15-bold mr-2 mb-1">${comment.userLoginId}</div>
+								<div>${comment.content}</div>
+							</div>
+							<div>
+								<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
+								<a type="button" id="text-style-14-gray">댓글 n개 모두 보기(구현 중)</a>
+							</div>
+						</c:forEach>
 					</div>
 
 					<%-- 댓글 입력창 --%>
 					<div class="post-comment">
 						<div class="d-flex align-items-center h-100">
 							<img src="/image/comment.png" class="post-icon ml-3">
-							<input type="text" id="commentText${content.id}" class="comment-input ml-3 mr-3" placeholder="댓글 달기...">
-							<button type="button" class="commentBtn btn btn-light" data-post-id="${content.id}">게시</button>
+							<input type="text" id="commentText${content.post.id}" class="comment-input ml-3 mr-3" placeholder="댓글 달기...">
+							<button type="button" class="commentBtn btn btn-light" data-post-id="${content.post.id}">게시</button>
 						</div>
 					</div>
 				</div>
@@ -87,13 +95,20 @@
 	</div>
 	<div class="side-box">
 		<div class="profile">
-			<div class="profile-img-box">
-				<img alt="profile" src="/image/profile-img1.jpeg"
-					class="profile-img">
+			<div>
+				<%-- 프로필 이미지를 받아와서 프로필 이미지가 없으면 기본 이미지 노출 --%>
+						<c:choose>
+							<c:when test="${not empty content.user.profileImageUrl}">
+								<img alt="profile" src="/image/profile-img1.jpeg" class="profile-img-side">
+							</c:when>
+							<c:otherwise>
+								<img alt="profile" src="/image/user.png" class="profile-img-side">
+							</c:otherwise>
+						</c:choose>
 			</div>
 			<div class="d-flex justify-content-between w-100">
 				<div>
-					<div class="text-style-15-bold">포스팅한 사용자 아이디</div>
+					<div class="text-style-15-bold"><a href="#">${userLoginId}</a></div>
 				</div>
 			</div>
 		</div>
@@ -103,8 +118,45 @@
 	</div>
 </section>
 
+<jsp:include page="../post/delete_modal.jsp" />
+
+
 <script>
 $(document).ready(function(e) {
+	
+	// 삭제 모달 노출 버튼
+	$('.delete-btn').on('click', function() {
+		$('.modal').fadeIn();
+	});
+	
+	// 글 내용 더보기 기능
+	$('.post-content').each(function() {
+		let moreBtn = $(this).find('.more');
+		
+		// .post-content를 순회하면서 .context를 찾는다.
+		let context = $(this).find('.context');
+		// .context의 내용을 가져온다.
+		let context_text = context.text();
+		// .context의 요약
+		let context_text_short = context_text.substring(0, 16) + "...";
+		
+		if (context_text.length > 16) {
+			// .context의 길이가 12자를 초과할 때, 글자수를 12자로 줄이고, 더보기 버튼을 노출한다
+			context.html(context_text_short);
+			moreBtn.removeClass('d-none');
+		} else {
+			// 12자를 초과하지 않으면 더보기 버튼 숨기기
+			moreBtn.addClass('d-none');
+		}
+		
+		// 더보기 버튼 클릭하면 글 내용 전체 보이기
+		moreBtn.on('click', function() {
+			context.html(context_text);
+			$(this).addClass('d-none');
+		});
+	});
+	
+	
 	// 댓글쓰기
 	$('.commentBtn').on('click', function(e) {
 		e.preventDefault(); //기본기능 중단

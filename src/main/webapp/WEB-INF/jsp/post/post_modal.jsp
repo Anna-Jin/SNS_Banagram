@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<div class="modal">
-	<div class="modal_content">
+<div class="modal fade post-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+	<div class="modal-content post-modal-content">
 		<div class="title">
 			<div class="h-100 d-flex justify-content-end align-items-center">
-				<div class="title-box">
+				<div class="title-box d-flex justify-content-center">
 					<div class="title-font">새 게시물 만들기</div>
 				</div>
 				<button type="button" class="submit-btn">공유하기</button>
@@ -37,23 +38,13 @@
 			</div>
 		</div>
 	</div>
+ </div>
 </div>
 
 
 <script>
 		$(document).ready(function(e) {
-			// 모달창 켜고 끄기
-			$(".create-post-btn").on('click', function() {
-				$(".modal").fadeIn();
-			});
-			
 
-			/* $(".modal").on('click', function(e) {
-				if (!$(e.target).hasClass('.modal_content')) {
-					$(".modal").fadeOut();
-				}
-			}); */
-			
 			
 			// 파일버튼 클릭하면 파일 추가하고 이름 띄우기
 			$('.image-btn').on('click', function() {
