@@ -22,7 +22,7 @@
 		</div>
 		<%-- 알림 확인 버튼 --%>
 		<div class="h-100 d-flex align-items-center mr-3">
- 		<a href="#"><img src="/image/like-black.png" alt="main_icon" class="nav-icon"></a>
+ 		<a href="#"><img src="/image/like-off.png" alt="main_icon" class="nav-icon"></a>
  		</div>
  		<%-- 프로필 버튼 --%>
  		<div class="h-100 d-flex align-items-center mr-3">

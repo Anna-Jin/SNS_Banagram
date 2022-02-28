@@ -18,16 +18,17 @@ button {
 }
 
 .content {
-	width: 935px;
+	width: 934px;
 	padding: 0;
 }
 
 .timeline-box {
-	width: 100%;
+	width: 616px;
 }
 
 .side-box {
-	width: 320px;
+	width: 318px;
+	margin: 27px;
 }
 
 .profile {
@@ -160,9 +161,10 @@ nav {
 	height: 25px;
 }
 
-#post-icon-like {
+.post-icon-like {
 	width: 30px;
 	height: 30px;
+	margin-top: 1px;
 }
 
 .post-content {
@@ -174,6 +176,14 @@ nav {
 .text-style-15-bold {
 	font-size: 15px;
 	font-weight: bold;
+}
+
+.userLoginId {
+	color: #000;
+}
+
+.userLoginId:hover {
+	color: #000;
 }
 
 #text-style-14-gray {

@@ -5,7 +5,6 @@ import java.util.Date;
 public class Comment {
 	private int id;
 	private int userId;
-	private String userLoginId;
 	private int postId;
 	private String content;
 	private Date creadtedAt;
@@ -23,12 +22,7 @@ public class Comment {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUserLoginId() {
-		return userLoginId;
-	}
-	public void setUserLoginId(String userLoginId) {
-		this.userLoginId = userLoginId;
-	}
+	
 	public int getPostId() {
 		return postId;
 	}

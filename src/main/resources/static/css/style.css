@@ -2,13 +2,10 @@
 
 #wrap {
 	background-color: #f6f6f6;
-	height: 600px;
-/* 	width: 1200px; */
+	/* height: 600px; */
+	width: 1200px;
 }
 
-a {
-	color: #000 !important;
-}
 
 /* login */
 .login-box {

@@ -23,7 +23,7 @@
 					<div class="d-flex justify-content-between w-100">
 						<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
 						<div>
-							<div class="text-style-15-bold"><a href="#">${content.post.userLoginId}</a></div>
+							<div class="text-style-15-bold"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
 						</div>
 						<%-- 글 삭제 버튼. 클릭하면 삭제하기 모달 노출 --%>
 						<div>
@@ -42,8 +42,8 @@
 					<%-- 좋아요, 댓글, 태그아이콘 부분 --%>
 					<div class="post-icon-box">
 						<div class="col-4 p-0">
-							<button type="button">
-								<img src="/image/like-black.png" id="post-icon-like">
+							<button type="button" id="like-btn" data-post-id="${content.post.id}">
+								<img src="/image/like-off.png" class="post-like post-icon-like">
 							</button>
 							<img src="/image/comment.png" class="post-icon">
 						</div>
@@ -62,7 +62,7 @@
 					<div class="post-content">
 						<div class="text-style-15-bold mb-2 mt-2">좋아요 14,221개</div>
 						<div class="d-flex">
-							<div class="text-style-15-bold mr-2 mb-1"><a href="#">${content.post.userLoginId}</a></div>
+							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
 							<div class="context">${content.post.content}</div>
 							<div class="d-flex">
 								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
@@ -71,14 +71,14 @@
 						<%-- 댓글 뿌려지는 모습을 확인하기 위해 우선 만들고 나중에 게시글보기 창 완성되면 거기에 추가하기 --%>
 						<c:forEach items="${content.commentList}" var="comment">
 							<div class="d-flex align-items-cetner">
-								<div class="text-style-15-bold mr-2 mb-1">${comment.userLoginId}</div>
-								<div>${comment.content}</div>
+								<div class="text-style-15-bold mr-2 mb-1">${comment.user.loginId}</div>
+								<div>${comment.comment.content}</div>
 							</div>
+						</c:forEach>
 							<div>
 								<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
 								<a type="button" id="text-style-14-gray">댓글 n개 모두 보기(구현 중)</a>
 							</div>
-						</c:forEach>
 					</div>
 
 					<%-- 댓글 입력창 --%>
@@ -108,7 +108,7 @@
 			</div>
 			<div class="d-flex justify-content-between w-100">
 				<div>
-					<div class="text-style-15-bold"><a href="#">${userLoginId}</a></div>
+					<div class="text-style-15-bold"><a class="userLoginId" href="#">${userLoginId}</a></div>
 				</div>
 			</div>
 		</div>
@@ -163,6 +163,8 @@ $(document).ready(function(e) {
 		
 		let postId = $(this).data('post-id'); // data-post-id
 		let commentContent = $('#commentText' + postId).val().trim();
+		// let commentContent = #(this).siblings('input').val().trim();
+		
 		if(commentContent == '') {
 			alert("댓글 내용을 입력해주세요");
 			return;
@@ -184,6 +186,41 @@ $(document).ready(function(e) {
 			}
 		});
 	});
+	
+	
+	// 포스트 좋아요
+	$('#like-btn').on('click', function() {
+		
+		// 좋아요 버튼 클릭하면 on, off (색 바뀜)
+		let likeImg = $(this).children('img');
+		likeImg.attr('src', function(index, attr) {
+			if (attr.match('off')) {
+				return attr.replace('off', 'on');
+			} else {
+				return attr.replace('on', 'off');
+			}
+		});
+		
+		// like의 src에서 on / off 부분만 뽑아온다.
+		let likeStatus = likeImg.attr('src').split('-')[1].split('.')[0];
+		let postId = $(this).data('post-id');
+		
+		$.ajax ({
+			url: "/like/" + postId
+			, data: {"postId": postId, "likeStatus", likeStatus}
+			, success: function(data) {
+				if (data.result == 'success') {
+					
+				}
+			} else {
+				alert(data.errorMessage);
+			}
+			, error: function(e) {
+				alert("좋아요에 문제가 있네요. 관리자에게 문의해주세요");
+			}
+		});
+	});
+	
 });
 
 

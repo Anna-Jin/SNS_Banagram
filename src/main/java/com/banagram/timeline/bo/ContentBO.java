@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.banagram.comment.bo.CommentBO;
-import com.banagram.comment.model.Comment;
+import com.banagram.comment.model.CommentView;
 import com.banagram.post.bo.PostBO;
 import com.banagram.post.model.Post;
 import com.banagram.timeline.model.ContentView;
@@ -33,23 +33,24 @@ public class ContentBO {
 	public List<ContentView> generateContentViewList() {
 		// 글 List를 가져온다. -> 반복문 돌림
 		List<ContentView> contentList = new ArrayList<>();
+		
 		// 포스트 목록
 		// content에 postList를 집어 넣는다.
 		List<Post> postList = postBO.getPostList();
 		for (Post post : postList) {
-			ContentView contentView = new ContentView();
+			ContentView content = new ContentView();
 			// ContentView 모델에 포스트 집어넣기
-			contentView.setPost(post);
+			content.setPost(post);
 			
 			// ContentView 모델에 댓글 집어넣기
-			List<Comment> commentList = commentBO.getCommentList(post.getId());
-			contentView.setCommentList(commentList);
+			List<CommentView> commentList = commentBO.genterateCommentListByPostId(post.getId());
+			content.setCommentList(commentList);
 			
 			// ContentView 모델에 프로필사진 집어넣기
 			User user = userBO.getUserByUserId(post.getUserId());
-			contentView.setUser(user);
+			content.setUser(user);
 			
-			contentList.add(contentView);
+			contentList.add(content);
 		}
 		
 		return contentList;
