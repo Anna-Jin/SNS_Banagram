@@ -12,4 +12,22 @@
 			`userId` = #{userId} AND
 			`postId` = #{postId} 
  	</select>
+ 	<insert id="insertLike" parameterType="map">
+ 		INSERT INTO `postLike`
+ 		(
+ 			`userId`
+ 			, `postId`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{postId}
+ 		)
+ 	</insert>
+ 	<delete id="deleteLikeByPostIdUserId" parameterType="map">
+ 		DELETE FROM `postLike`
+ 		WHERE
+ 			`userId` = #{userId} AND
+ 			`postId` = #{postId}
+ 	</delete>
  </mapper>

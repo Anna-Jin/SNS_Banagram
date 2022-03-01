@@ -42,7 +42,7 @@
 					<%-- 좋아요, 댓글, 태그아이콘 부분 --%>
 					<div class="post-icon-box">
 						<div class="col-4 p-0">
-							<button type="button" id="like-btn" data-post-id="${content.post.id}">
+							<button type="button" class="like-btn" data-post-id="${content.post.id}">
 								<img src="/image/like-off.png" class="post-like post-icon-like">
 							</button>
 							<img src="/image/comment.png" class="post-icon">
@@ -190,7 +190,7 @@ $(document).ready(function(e) {
 	
 	
 	// 포스트 좋아요
-	$('#like-btn').on('click', function() {
+	$('.like-btn').on('click', function() {
 		
 		// 좋아요 버튼 클릭하면 on, off (색 바뀜)
 		/* let likeImg = $(this).children('img');
@@ -209,7 +209,7 @@ $(document).ready(function(e) {
 			, data: {"postId": postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert('성공');
+					
 				} else {
 					alert(data.errorMessage);
 			} 

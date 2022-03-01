@@ -40,12 +40,12 @@ public class LikeRestController {
 		
 		if (exist) {
 			// 좋아요가 눌러져있을 때 -> postId와 매칭되는 userId 삭제
+			likeBO.deleteLikeByPostIdUserId(userId, postId);
 		} else {
 			// 좋아요가 눌러져있지 않을 때 -> postId와 userId insert
+			likeBO.addLike(userId, postId);
 		}
-		
-		
-		
+				
 		result.put("result", "success");
 		
 		return result;
