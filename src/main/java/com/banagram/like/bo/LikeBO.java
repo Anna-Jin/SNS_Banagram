@@ -10,9 +10,16 @@ public class LikeBO {
 	
 	@Autowired
 	private LikeDAO likeDAO;
-
 	
-	public void isLikesOn(int userId, int postId) {
-		likeDAO.insertLikeByPostId(userId, postId);
+	public boolean existLike(int userId, int postId) {
+		return likeDAO.existLike(userId, postId);
+	}
+	
+	public void addLike(int userId, int postId) {
+		likeDAO.insertLike(userId, postId);
+	}
+	
+	public void deleteLikeByPostIdUserId(int userId, int postId) {
+		likeDAO.deleteLikeByPostIdUserId(userId, postId);
 	}
 }

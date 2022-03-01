@@ -30,7 +30,6 @@ public class PostRestController {
 			) {
 		
 		Map<String, Object> result = new HashMap<>();
-		result.put("result", "success");
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
@@ -44,6 +43,7 @@ public class PostRestController {
 		
 		// db에 insert
 		postBO.addPost(userId, userLoginId, file, content);
+		result.put("result", "success");
 		
 		return result;
 	}
