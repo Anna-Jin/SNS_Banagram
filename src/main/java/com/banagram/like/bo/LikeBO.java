@@ -15,6 +15,10 @@ public class LikeBO {
 		return likeDAO.existLike(userId, postId);
 	}
 	
+	public int countLike(int postId) {
+		return likeDAO.countLike(postId);
+	}
+	
 	public void addLike(int userId, int postId) {
 		likeDAO.insertLike(userId, postId);
 	}

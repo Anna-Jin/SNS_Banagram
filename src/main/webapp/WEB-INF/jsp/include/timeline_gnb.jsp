@@ -44,7 +44,6 @@
 							<li><a class="dropdown-item hr" href="#">프로필</a></li>
 							<li><a class="dropdown-item text-danger" href="/user/logout">로그아웃</a></li>
 						</ul>
-						
 	 				</c:otherwise>	
 	 			</c:choose>
 	 		</c:if>	

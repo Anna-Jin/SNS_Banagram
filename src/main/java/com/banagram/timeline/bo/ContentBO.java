@@ -7,12 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.banagram.comment.bo.CommentBO;
-import com.banagram.comment.model.CommentView;
+import com.banagram.like.bo.LikeBO;
 import com.banagram.post.bo.PostBO;
 import com.banagram.post.model.Post;
 import com.banagram.timeline.model.ContentView;
 import com.banagram.user.bo.UserBO;
-import com.banagram.user.model.User;
 
 @Service
 public class ContentBO {
@@ -25,12 +24,11 @@ public class ContentBO {
 	
 	@Autowired
 	private UserBO userBO;
-//	
-//	@Autowired
-//	private LikeBO likeBO;
 	
-	// 로그인 되지 않아도 타임라인은 볼 수 있으므로 userId는 Integer
-	public List<ContentView> generateContentViewList() {
+	@Autowired
+	private LikeBO likeBO;
+	
+	public List<ContentView> generateContentViewList(int userId) {
 		// 글 List를 가져온다. -> 반복문 돌림
 		List<ContentView> contentList = new ArrayList<>();
 		
@@ -43,12 +41,16 @@ public class ContentBO {
 			content.setPost(post);
 			
 			// ContentView 모델에 댓글 집어넣기
-			List<CommentView> commentList = commentBO.genterateCommentListByPostId(post.getId());
-			content.setCommentList(commentList);
+			content.setCommentList(commentBO.genterateCommentListByPostId(post.getId()));
 			
 			// ContentView 모델에 프로필사진 집어넣기
-			User user = userBO.getUserByUserId(post.getUserId());
-			content.setUser(user);
+			content.setUser(userBO.getUserByUserId(post.getUserId()));
+			
+			// ContentView 모델에 좋아요 추가 여부 집어넣기
+			content.setExistLike(likeBO.existLike(userId, post.getId()));
+			
+			// ContentView 모델에 좋아요 카운팅 집어넣기
+			content.setCountLike(likeBO.countLike(userId));
 			
 			contentList.add(content);
 		}

@@ -43,7 +43,14 @@
 					<div class="post-icon-box">
 						<div class="col-4 p-0">
 							<button type="button" class="like-btn" data-post-id="${content.post.id}">
-								<img src="/image/like-off.png" class="post-like post-icon-like">
+								<c:choose>
+									<c:when test="${content.existLike}">
+										<img src="/image/like-on.png" class="post-like post-icon-like">
+									</c:when>
+									<c:otherwise>
+										<img src="/image/like-off.png" class="post-like post-icon-like">
+									</c:otherwise>	
+								</c:choose>
 							</button>
 							<img src="/image/comment.png" class="post-icon">
 						</div>
@@ -60,7 +67,7 @@
 
 					<%-- 포스트 좋아요 개수, 아이디, 글 내용, 댓글 모두보기 --%>
 					<div class="post-content">
-						<div class="text-style-15-bold mb-2 mt-2">좋아요 14,221개</div>
+						<div class="text-style-15-bold mb-2 mt-2">좋아요 ${content.countLike}개</div>
 						<div class="d-flex">
 							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
 							<div class="context">${content.post.content}</div>
@@ -209,10 +216,10 @@ $(document).ready(function(e) {
 			, data: {"postId": postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					
+					location.href = "/timeline"
 				} else {
 					alert(data.errorMessage);
-			} 
+				} 
 			}
 			, error: function(e) {
 				alert("좋아요에 문제가 있네요. 관리자에게 문의해주세요");
