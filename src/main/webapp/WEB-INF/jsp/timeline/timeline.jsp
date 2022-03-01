@@ -131,6 +131,7 @@ $(document).ready(function(e) {
 	
 	// 글 내용 더보기 기능
 	$('.post-content').each(function() {
+
 		let moreBtn = $(this).find('.more');
 		
 		// .post-content를 순회하면서 .context를 찾는다.
@@ -205,20 +206,20 @@ $(document).ready(function(e) {
 		let likeStatus = likeImg.attr('src').split('-')[1].split('.')[0];
 		let postId = $(this).data('post-id');
 		
-		$.ajax ({
+		/* $.ajax ({
 			url: "/like/" + postId
-			, data: {"postId": postId, "likeStatus", likeStatus}
+			, data: {"postId": postId, "likeStatus": likeStatus}
 			, success: function(data) {
 				if (data.result == 'success') {
-					
-				}
-			} else {
-				alert(data.errorMessage);
+					aelrt('성공');
+				} else {
+					alert(data.errorMessage);
+			} 
 			}
 			, error: function(e) {
 				alert("좋아요에 문제가 있네요. 관리자에게 문의해주세요");
 			}
-		});
+		}); */
 	});
 	
 });

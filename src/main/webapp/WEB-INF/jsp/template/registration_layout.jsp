@@ -15,7 +15,8 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<div id="wrap" class="d-flex justify-content-center align-items-center">
+<div id="body">
+	<div id="registration-wrap">
 		<div>
 			<section class="content">
 				<jsp:include page="../user/${viewPath}.jsp" />
@@ -25,6 +26,6 @@
 			</footer>
 		</div>
 	</div>
-
+</div>
 </body>
 </html>

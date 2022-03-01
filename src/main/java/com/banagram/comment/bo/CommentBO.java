@@ -22,8 +22,8 @@ public class CommentBO {
 	@Autowired
 	private UserBO userBO;
 	
-	public int writeComment(int userId, String userLoginId, int postId, String content) {
-		return commentDAO.insertComment(userId, userLoginId, postId, content);
+	public int writeComment(int userId, int postId, String content) {
+		return commentDAO.insertComment(userId, postId, content);
 	}
 	
 	public List<CommentView> genterateCommentListByPostId(int postId) {

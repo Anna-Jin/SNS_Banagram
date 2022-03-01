@@ -1,9 +1,19 @@
 @charset "UTF-8";
 
-#wrap {
+body {
 	background-color: #f6f6f6;
-	/* height: 600px; */
-	width: 1200px;
+}
+
+#body {
+	box-sizing: border-box;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+}
+
+#registration-wrap {
+	margin: 150px auto;
 }
 
 

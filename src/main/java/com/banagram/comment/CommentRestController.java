@@ -41,7 +41,7 @@ public class CommentRestController {
 		}
 		
 		// insert DB
-		int row = commentBO.writeComment(userId, userLoginId, postId, content);
+		int row = commentBO.writeComment(userId, postId, content);
 		if (row > 0) {
 			result.put("result", "success");
 		} else {
