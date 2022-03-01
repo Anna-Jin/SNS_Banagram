@@ -193,25 +193,23 @@ $(document).ready(function(e) {
 	$('#like-btn').on('click', function() {
 		
 		// 좋아요 버튼 클릭하면 on, off (색 바뀜)
-		let likeImg = $(this).children('img');
+		/* let likeImg = $(this).children('img');
 		likeImg.attr('src', function(index, attr) {
 			if (attr.match('off')) {
 				return attr.replace('off', 'on');
 			} else {
 				return attr.replace('on', 'off');
 			}
-		});
+		}); */
 		
-		// like의 src에서 on / off 부분만 뽑아온다.
-		let likeStatus = likeImg.attr('src').split('-')[1].split('.')[0];
 		let postId = $(this).data('post-id');
 		
-		/* $.ajax ({
+		$.ajax ({
 			url: "/like/" + postId
-			, data: {"postId": postId, "likeStatus": likeStatus}
+			, data: {"postId": postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					aelrt('성공');
+					alert('성공');
 				} else {
 					alert(data.errorMessage);
 			} 
@@ -219,7 +217,7 @@ $(document).ready(function(e) {
 			, error: function(e) {
 				alert("좋아요에 문제가 있네요. 관리자에게 문의해주세요");
 			}
-		}); */
+		});
 	});
 	
 });
