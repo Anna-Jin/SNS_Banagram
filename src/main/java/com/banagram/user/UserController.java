@@ -1,6 +1,7 @@
 package com.banagram.user;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,5 +47,20 @@ public class UserController {
 		request.removeAttribute("userId");
 		
 		return "redirect:/user/login-view";
+	}
+	
+	@RequestMapping("/profile")
+	public String profile(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
+		if (userId == null || userLoginId == null) {
+			return "redirect:user/login-view";
+		}
+		
+		model.addAttribute("viewPath", "user/profile");
+		
+		return "template/timeline_layout";
 	}
 }
