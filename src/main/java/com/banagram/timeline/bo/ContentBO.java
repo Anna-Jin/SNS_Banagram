@@ -50,7 +50,7 @@ public class ContentBO {
 			content.setExistLike(likeBO.existLike(userId, post.getId()));
 			
 			// ContentView 모델에 좋아요 카운팅 집어넣기
-			content.setCountLike(likeBO.countLike(userId));
+			content.setCountLike(likeBO.countLike(post.getId()));
 			
 			contentList.add(content);
 		}
