@@ -11,7 +11,7 @@ public class ContentView {
 	private Post post;
 	private List<CommentView> commentList;
 	private User user;
-	private boolean existLike;
+	private boolean existLike; // 내가 좋아요를 눌렀는 지에 대한 여부
 	private int countLike;
 	
 	public Post getPost() {
