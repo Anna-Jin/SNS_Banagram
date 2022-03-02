@@ -216,7 +216,7 @@ $(document).ready(function(e) {
 			, data: {"postId": postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					location.href = "/timeline"
+					location.reload(true);
 				} else {
 					alert(data.errorMessage);
 				} 
