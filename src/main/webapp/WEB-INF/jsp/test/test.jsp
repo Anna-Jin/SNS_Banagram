@@ -13,50 +13,47 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <style>
+body {
+  margin:0;
+}
 
+.top-bar {
+  background-image:linear-gradient(to right, red, green);
+}
+
+.con {  
+  margin-left:auto;
+  margin-right:auto;
+}
+
+:root {
+  --site-width:700px;
+}
+
+.con-min-width {
+  min-width:var(--site-width);
+  padding:0 100px;
+}
+
+.con {
+  min-width:var(--site-width);
+}
+
+.top-bar {
+  color:white;
+  font-size:1rem;
+  font-weight:bold;
+}
 
 </style>
 </head>
 <body>
-	<!-- Large modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target=".bs-example-modal-lg">Large modal</button>
+<header class="top-bar con-min-width">
+  <div class="con">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque possimus rerum provident sit consectetur, alias ab ipsa temporibus iure, obcaecati eos, voluptatem saepe inventore voluptates nostrum tempora dicta quas officia.
+    Ipsum consectetur excepturi beatae eos! Neque numquam fuga eos non fugit aliquid molestias odit asperiores sunt amet quae velit cumque nihil distinctio soluta praesentium dolorum minus ipsum, voluptates magnam iusto. 
+  </div>
+</header>
 
-	<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">...</div>
-		</div>
-	</div>
-
-	<!-- Small modal -->
-	<button type="button" class="btn btn-primary" data-toggle="modal"
-		data-target=".bs-example-modal-sm">Small modal</button>
-
-	<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog"
-		aria-labelledby="mySmallModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-sm">
-			<div class="modal-content">...</div>
-		</div>
-	</div>
-
-
-	<div class="dropdown">
-		<button class="btn btn-secondary dropdown-toggle" type="button"
-			id="dropdownMenuButton1" data-bs-toggle="dropdown"
-			aria-expanded="false">Dropdown button</button>
-		<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-			<li><a class="dropdown-item" href="#">Action</a></li>
-			<li><a class="dropdown-item" href="#">Another action</a></li>
-			<li><a class="dropdown-item" href="#">Something else here</a></li>
-		</ul>
-	</div>
-	
-
-	<script>
-	$(document).ready(function() {
-		 $(".dropdown-toggle").dropdown();
-	});
-	</script>
 </body>
 </html>

@@ -15,6 +15,20 @@
 			`post`
 		ORDER BY `id` DESC
  	</select>
+ 	<select id="selectPostById" parameterType="int" resultType="com.banagram.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`imagePath`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`id` = #{postId}
+ 	</select>
  	<insert id="insertPost" parameterType="map">
  		INSERT INTO `post`
  		(
@@ -35,4 +49,10 @@
  			, NOW()
  		)
  	</insert>
+ 	<delete id="deletePostByPostIdUserId" parameterType="map">
+ 		DELETE FROM `post`
+ 		WHERE
+ 			`id` = #{postId} AND
+ 			`userId` = #{userId}
+ 	</delete>
  </mapper>

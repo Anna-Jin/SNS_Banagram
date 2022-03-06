@@ -13,9 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManagerService {
 	
 	// for mac
-	// public final static String FILE_UPLOAD_PATH = "/Users/jin-yujin/Desktop/yujin/megaIT/SNS_Banagram/workspace/images/";
+	public final static String FILE_UPLOAD_PATH = "/Users/jin-yujin/Desktop/yujin/megaIT/SNS_Banagram/workspace/images/";
 	// for window
-	public final static String FILE_UPLOAD_PATH = "D:\\진유진_java\\6_spring-project\\sns_banagram\\workspace\\images/";
+	// public final static String FILE_UPLOAD_PATH = "D:\\진유진_java\\6_spring-project\\sns_banagram\\workspace\\images/";
 	
 	public String savaFile(String userLoginId, MultipartFile file) {
 		// 파일 디렉토리 경로 예: appletree066_1232141241/sun.png
@@ -43,5 +43,17 @@ public class FileManagerService {
 		}
 		
 		return null;
+	}
+	
+	public void deleteFile(String imagePath) {
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		if (Files.exists(path)) {
+			// 이미지 파일이 있으면 삭제
+			try {
+				Files.delete(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

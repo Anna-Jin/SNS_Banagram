@@ -23,7 +23,13 @@ public class LikeBO {
 		likeDAO.insertLike(userId, postId);
 	}
 	
+	// 좋아요 취소
 	public void deleteLikeByPostIdUserId(int userId, int postId) {
 		likeDAO.deleteLikeByPostIdUserId(userId, postId);
+	}
+	
+	// post 삭제 시 함께 삭제하기 위한 BO
+	public void deleteLikeByPostId(int postId) {
+		likeDAO.deleteLikeByPostId(postId);
 	}
 }

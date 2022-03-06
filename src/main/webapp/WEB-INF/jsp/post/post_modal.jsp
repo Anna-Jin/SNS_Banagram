@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div class="modal fade post-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade post-modal">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
 	<div class="modal-content post-modal-content">
 		<div class="title">
 			<div class="h-100 d-flex justify-content-end align-items-center">
@@ -25,10 +26,16 @@
 			<div class="col-4 p-3">
 				<div class="post-box d-flex align-items-center mb-4">
 					<div class="profile-img-box">
-						<img alt="profile" src="/image/profile-img1.jpeg"
-							class="profile-img">
+						<c:choose>
+							<c:when test="${not empty user.profileImageUrl}">
+								<img alt="profile" src="/image/profile-img1.jpeg" class="profile-img">
+							</c:when>
+							<c:otherwise>
+								<img alt="profile" src="/image/user.png" class="profile-img">
+							</c:otherwise>
+						</c:choose>
 					</div>
-					<div class="d-flex justify-content-between w-100">
+					<div class="ml-3 d-flex justify-content-between">
 						<div>
 							<div class="text-style-15-bold">${userLoginId}</div>
 						</div>

@@ -17,4 +17,8 @@ public interface CommentDAO {
 			@Param("content") String content);
 	
 	public List<Comment> selectCommentList(int postId);
+	
+	
+	// post 삭제 시 함께 삭제하기 위한 DAO
+	public void deleteCommentByPostId(int postId);
 }

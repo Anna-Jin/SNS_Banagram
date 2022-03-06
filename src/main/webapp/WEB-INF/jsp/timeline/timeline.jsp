@@ -20,16 +20,24 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<div class="d-flex justify-content-between w-100">
-						<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
-						<div>
-							<div class="text-style-15-bold"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
-						</div>
-						<%-- 글 삭제 버튼. 클릭하면 삭제하기 모달 노출 --%>
-						<div>
-							<button type="button" data-toggle="modal" data-target=".del-modal">
-								<i class="fa-lg fa-solid fa-ellipsis mr-1"></i>
-							</button>
+					<div class="pr-0 ml-2 col-11 d-flex align-items-center justify-content-between">
+						<div class="">
+							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
+							<div>
+								<div class="text-style-15-bold"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
+							</div>
+						</div>	
+						<div class="col-1" id="post-del-btn">
+							<div>
+								<div>
+									<%-- 글 삭제 버튼. 클릭하면 삭제하기 모달 노출 --%>
+									<c:if test="${userId eq content.user.id}">
+										<button type="button" class="del-btn" data-toggle="modal" data-target=".del-modal" data-post-id="${content.post.id}">
+											<i class="fa-lg fa-solid fa-ellipsis mr-1"></i>
+										</button>
+									</c:if>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -56,7 +64,6 @@
 						</div>
 						<div class="col-4 p-0">
 							<div class="d-flex justify-content-center">
-								<%-- 이미지 개수에 따라 버튼개수 가감 --%>
 								<div class="img-list-btn"></div>
 							</div>
 						</div>
@@ -130,11 +137,7 @@
 
 <script>
 $(document).ready(function(e) {
-	
-	// 삭제 모달 노출 버튼
-	$('.delete-btn').on('click', function() {
-		$('.modal').fadeIn();
-	});
+
 	
 	// 글 내용 더보기 기능
 	$('.post-content').each(function() {
@@ -199,16 +202,6 @@ $(document).ready(function(e) {
 	// 포스트 좋아요
 	$('.like-btn').on('click', function() {
 		
-		// 좋아요 버튼 클릭하면 on, off (색 바뀜)
-		/* let likeImg = $(this).children('img');
-		likeImg.attr('src', function(index, attr) {
-			if (attr.match('off')) {
-				return attr.replace('off', 'on');
-			} else {
-				return attr.replace('on', 'off');
-			}
-		}); */
-		
 		let postId = $(this).data('post-id');
 		
 		$.ajax ({
@@ -227,6 +220,12 @@ $(document).ready(function(e) {
 		});
 	});
 	
+	// 카드에서 ...버튼 클릭시 모달에 삭제될 글 번호를 넣어준다.
+	$('.del-btn').on('click', function() {
+		let postId = $(this).data('post-id');
+		
+		$('.del-modal').data('post-id', postId); // del-modal 태그에 data-post-id 삽입
+	});
 });
 
 

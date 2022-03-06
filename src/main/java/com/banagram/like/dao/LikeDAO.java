@@ -20,4 +20,7 @@ public interface LikeDAO {
 	public void deleteLikeByPostIdUserId(
 			@Param("userId") int userId,
 			@Param("postId") int postId);
+	
+	// post 삭제 시 함께 삭제하기 위한 DAO
+	public void deleteLikeByPostId(int postId);
 }
