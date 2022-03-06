@@ -45,6 +45,9 @@ public class CommentBO {
 		return resultList;
 	}
 	
+	public int deleteCommentByPostIdUserIdCommentId(int userId, int postId, int commentId) {
+		return commentDAO.deleteCommentByPostIdUserIdCommentId(userId, postId, commentId);
+	}
 	
 	// post 삭제 시 함께 삭제하기 위한 BO
 	public void deleteCommentByPostId(int postId) {

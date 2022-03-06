@@ -82,12 +82,20 @@
 								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
 							</div>
 						</div>
-						<%-- 댓글 뿌려지는 모습을 확인하기 위해 우선 만들고 나중에 게시글보기 창 완성되면 거기에 추가하기 --%>
 						<c:forEach items="${content.commentList}" var="comment">
+						<div class="d-flex justify-content-between">
 							<div class="d-flex align-items-cetner">
 								<div class="text-style-15-bold mr-2 mb-1">${comment.user.loginId}</div>
 								<div>${comment.comment.content}</div>
 							</div>
+							<div>
+								<c:if test="${comment.user.loginId eq userLoginId}">
+									<button type="button" class="comment-del-btn mr-1" data-post-id="${content.post.id}" data-comment-id="${comment.comment.id}">
+										<img src="/image/close.png" alt="댓글삭제" width="10">
+									</button>
+								</c:if>
+							</div>
+						</div>	
 						</c:forEach>
 							<div>
 								<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
@@ -194,6 +202,25 @@ $(document).ready(function(e) {
 			}
 			, error: function(e) {
 				alert("댓글 쓰기에 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
+	});
+	
+	// 댓글 삭제
+	$('.comment-del-btn').on('click', function() {
+		let postId = $(this).data('post-id');
+		let commentId = $(this).data('comment-id');
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/comment/delete"
+			, data: {"postId": postId, "commentId":commentId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload(true);
+				} else {
+					alert(errorMessage);
+				}
 			}
 		});
 	});
