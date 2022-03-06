@@ -19,6 +19,13 @@ public class FollowRestController {
 	@Autowired
 	private FollowBO followBO;
 
+	
+	/**
+	 * 팔로우 추가/삭제
+	 * @param followUserId
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/follow")
 	public Map<String, Object> follow(
 			@RequestParam("followUserId") int followUserId, // 팔로우 당하는 userId
