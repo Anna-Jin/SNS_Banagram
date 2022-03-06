@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
+<c:forEach items="${profileList}" var="profile">
 <div id="profile-view">
 	<div id="profile-header" class="d-flex justify-content-center">
 		<div class="d-flex justify-content-center w-100">
 			<%-- 프로필 이미지 --%>
 			<div class="col-5 d-flex justify-content-center align-items-center">
 				<c:choose>
-					<c:when test="${not empty user.profileImageUrl}">
-						<img alt="profile" src="${user.profileImageUrl}"
+					<c:when test="${not empty profile.user.profileImageUrl}">
+						<img alt="profile" src="${profile.user.profileImageUrl}"
 							class="profile-header-img">
 					</c:when>
 					<c:otherwise>
@@ -22,16 +22,16 @@
 				<%-- 프로필 id와 프로필 편집 --%>
 				<div id="profile-header-id" class="d-flex mb-3">
 					<div class="d-flex align-items-center">
-						<div class="profile-header-id mr-4">${user.loginId}</div>
+						<div class="profile-header-id mr-4">${profile.user.loginId}</div>
 						<c:choose>
-							<c:when test="${user.id eq userId}">
+							<c:when test="${profile.user.id eq userId}">
 								<div>
 									<button type="button" class="profile-header-edit-btn">프로필 편집</button>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div>
-									<button type="button" class="follow-btn btn btn-primary" data-follow-user-id="${user.id}">팔로우</button>
+									<button type="button" class="follow-btn btn btn-primary" data-follow-user-id="${profile.user.id}">팔로우</button>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -42,27 +42,27 @@
 				<div id="profile-header-count" class="d-flex align-items-center mb-3">
 					<div class="d-flex align-items-center mr-3">
 						<div class="mr-2">게시물</div>
-						<div class="font-weight-bold">3</div>
+						<div class="font-weight-bold">${profile.countPost}</div>
 					</div>
 					<div class="d-flex align-items-center mr-3">
 						<div class="mr-2">팔로워</div>
-						<div class="font-weight-bold">3</div>
+						<div class="font-weight-bold">${profile.countFollower}</div>
 					</div>
 					<div class="d-flex align-items-center">
 						<div class="mr-2">팔로잉</div>
-						<div class="font-weight-bold">3</div>
+						<div class="font-weight-bold">${profile.countFollow}</div>
 					</div>
 				</div>
 
 				<%-- 자기소개 --%>
 				<div id="profile-header-intro" class="d-flex flex-column justify-content-center">
 					<div>
-						<div class="font-weight-bold">${user.name}</div>
+						<div class="font-weight-bold">${profile.user.name}</div>
 					</div>
 					<div>
 						<c:choose>
-							<c:when test="${not empty user.introduce}">
-								<div>${user.introduce}</div>
+							<c:when test="${not empty profile.user.introduce}">
+								<div>${profile.user.introduce}</div>
 							</c:when>
 							<c:otherwise>
 								<div>소개글을 입력해주세요</div>
@@ -81,29 +81,14 @@
 	</div>
 	<div id="profile-body" class="d-flex flex-wrap justify-content-between">
 		<%-- 게시물 개수만큼 반복 --%>
+		<c:forEach items="${profile.postList}" var="post">
 		<div>
-			<img class="profile-body-content" src="/image/like-off.png" width="292">
+			<img class="profile-body-content" src="${post.imagePath}" width="292">
 		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
-		<div>
-			<img src="/image/like-off.png" width="292">
-		</div>
+		</c:forEach>
 	</div>
 </div>
+</c:forEach>
 
 <script>
  $(document).ready(function() {

@@ -31,4 +31,5 @@ public class UserBO {
 	public User getUserByUserId(int id) {
 		return userDAO.selectUserByUserId(id);
 	}
+	
 }

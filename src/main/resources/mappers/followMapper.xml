@@ -12,6 +12,22 @@
  			`userId` = #{userId} AND
  			`followUserId` = #{followUserId}
  	</select>
+ 	<select id="countFollow" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`follow`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
+ 	<select id="countFollower" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`follow`
+ 		WHERE
+ 			`followUserId` = #{userId}
+ 	</select>
  	<insert id="insertFollow" parameterType="map">
  		INSERT INTO `follow`
  		(

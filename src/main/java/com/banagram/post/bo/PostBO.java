@@ -35,6 +35,14 @@ public class PostBO {
 		return postDAO.selectPostList();
 	}
 	
+	public List<Post> getPostListByUserId(int userId) {
+		return postDAO.selectPostListByUserId(userId);
+	}
+	
+	public int countPostByUserId(int userId) {
+		return postDAO.countPostByUserId(userId);
+	}
+	
 	public void addPost(int userId, String userLoginId, MultipartFile file, String content) {
 		String imagePath = null;
 		if (file != null) {

@@ -57,24 +57,5 @@ public class UserController {
 		return "redirect:/user/login-view";
 	}
 	
-	@RequestMapping("/profile/{id}")
-	public String profile(
-			@PathVariable("id") int id,
-			Model model,
-			HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		Integer userId = (Integer)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
-		if (userId == null || userLoginId == null) {
-			return "redirect:user/login-view";
-		}
-		
-		User user = userBO.getUserByUserId(id);
-		
-		model.addAttribute("user", user);
-		model.addAttribute("viewPath", "user/profile");
-		
-		return "template/timeline_layout";
-	}
+
 }

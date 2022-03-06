@@ -29,6 +29,29 @@
 		WHERE
 			`id` = #{postId}
  	</select>
+ 	<select id="selectPostListByUserId" parameterType="int" resultType="com.banagram.post.model.Post">
+ 		SELECT
+ 			`id`
+			,`userId`
+			,`userLoginId`
+			,`imagePath`
+			,`content`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` DESC
+ 	</select>
+ 	<select id="countPostByUserId" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 	</select>
  	<insert id="insertPost" parameterType="map">
  		INSERT INTO `post`
  		(

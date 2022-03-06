@@ -10,6 +10,10 @@ public interface FollowDAO {
 			@Param("userId") int userId,
 			@Param("followUserId") int followUserId); 
 	
+	public int countFollow(int userId);
+	
+	public int countFollower(int userId);
+	
 	public void insertFollow(
 			@Param("userId") int userId,
 			@Param("followUserId") int followUserId);

@@ -15,6 +15,14 @@ public class FollowBO {
 		return followDAO.existFollow(userId, followUserId);
 	}
 	
+	public int countFollow(int userId) {
+		return followDAO.countFollow(userId);
+	}
+	
+	public int countFollower(int userId) {
+		return followDAO.countFollower(userId);
+	}
+	
 	public void addFollow(int userId, int followUserId) {
 		followDAO.insertFollow(userId, followUserId);
 	}
