@@ -26,7 +26,7 @@
 						<c:choose>
 							<c:when test="${profile.user.id eq userId}">
 								<div>
-									<button type="button" class="profile-header-edit-btn">프로필 편집</button>
+									<a href="/user/profile/edit" type="button" class="profile-header-edit-btn">프로필 편집</a>
 								</div>
 							</c:when>
 							<c:otherwise>
