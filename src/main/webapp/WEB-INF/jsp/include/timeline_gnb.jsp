@@ -4,7 +4,7 @@
     
 <div class="nav-box container d-flex justify-content-between">
 	<div class="logo-box col-4">
-		<img src="/image/banagram_logo.png" alt="banagram" class="logo">
+		<a href="/timeline"><img src="/image/banagram_logo.png" alt="banagram" class="logo"></a>
  	</div>
  	<div class="search-box h-100 d-flex align-items-center col-4">
  		<input type="text" id="search" class="form-control" placeholder="검색">
@@ -30,9 +30,15 @@
 	 			<c:choose>
 	 				<c:when test="${not empty profileImageUrl}">
 	 					<%-- 프로필 이미지가 있으면 해당 이미지 띄우기 --%>
-	 					<a href="#" tabindex="0" data-bs-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">
-	 						<img src="/image/user.png" alt="main_icon" class="nav-icon">
-	 					</a>
+	 					<button class="dropdown-toggle" type="button"
+							id="dropdownMenuButton1" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							<img src="${profileImageUrl}" alt="main_icon" class="nav-icon">
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<li><a class="dropdown-item hr" href="../user/profile">프로필</a></li>
+							<li><a class="dropdown-item text-danger" href="/user/logout">로그아웃</a></li>
+						</ul>
 	 				</c:when>
 	 				<c:otherwise>
 						<button class="dropdown-toggle" type="button"

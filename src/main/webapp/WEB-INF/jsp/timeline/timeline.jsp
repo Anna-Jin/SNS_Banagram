@@ -13,7 +13,7 @@
 						<%-- 프로필 이미지를 받아와서 프로필 이미지가 없으면 기본 이미지 노출 --%>
 						<c:choose>
 							<c:when test="${not empty content.user.profileImageUrl}">
-								<img alt="profile" src="/image/profile-img1.jpeg" class="profile-img">
+								<img alt="profile" src="${content.user.profileImageUrl}" class="profile-img">
 							</c:when>
 							<c:otherwise>
 								<img alt="profile" src="/image/user.png" class="profile-img">
@@ -24,7 +24,7 @@
 						<div class="">
 							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
 							<div>
-								<div class="text-style-15-bold"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
+								<div class="text-style-15-bold"><a class="userLoginId" href="/user/profile/${content.user.id}">${content.post.userLoginId}</a></div>
 							</div>
 						</div>	
 						<div class="col-1" id="post-del-btn">
@@ -67,8 +67,7 @@
 								<div class="img-list-btn"></div>
 							</div>
 						</div>
-						<div class="col-4 p-0 d-flex justify-content-end">
-							<img src="/image/bookmark.png" class="post-icon">
+						<div class="col-4 p-0">
 						</div>
 					</div>
 
@@ -76,7 +75,7 @@
 					<div class="post-content">
 						<div class="text-style-15-bold mb-2 mt-2">좋아요 ${content.countLike}개</div>
 						<div class="d-flex">
-							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="#">${content.post.userLoginId}</a></div>
+							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="/user/profile/${content.user.id}">${content.post.userLoginId}</a></div>
 							<div class="context">${content.post.content}</div>
 							<div class="d-flex">
 								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
@@ -95,9 +94,7 @@
 									<div>
 										<c:if
 											test="${content.commentList[0].user.loginId eq userLoginId}">
-											<button type="button" class="comment-del-btn mr-1"
-												data-post-id="${content.post.id}"
-												data-comment-id="${content.commentList[0].comment.id}">
+											<button type="button" class="comment-del-btn mr-2" data-post-id="${content.post.id}" data-comment-id="${content.commentList[0].comment.id}">
 												<img src="/image/close.png" alt="댓글삭제" width="10">
 											</button>
 										</c:if>
@@ -115,7 +112,7 @@
 									<div>
 										<c:if
 											test="${content.commentList[0].user.loginId eq userLoginId}">
-											<button type="button" class="comment-del-btn mr-1"
+											<button type="button" class="comment-del-btn mr-2"
 												data-post-id="${content.post.id}"
 												data-comment-id="${content.commentList[0].comment.id}">
 												<img src="/image/close.png" alt="댓글삭제" width="10">
@@ -149,7 +146,7 @@
 							<c:if test="${content.countComment > 1}">
 								<a type="button" id="text-style-14-gray" class="more-comment-btn"
 									data-count-comment="${content.countComment}">댓글
-									${content.countComment}개 모두 보기(구현 중)</a>
+									${content.countComment - 1}개 모두 보기</a>
 							</c:if>
 						</div>
 					</div>
@@ -170,18 +167,19 @@
 		<div class="profile">
 			<div>
 				<%-- 프로필 이미지를 받아와서 프로필 이미지가 없으면 기본 이미지 노출 --%>
-						<c:choose>
-							<c:when test="${not empty content.user.profileImageUrl}">
-								<img alt="profile" src="/image/profile-img1.jpeg" class="profile-img-side">
-							</c:when>
-							<c:otherwise>
-								<img alt="profile" src="/image/user.png" class="profile-img-side">
-							</c:otherwise>
-						</c:choose>
+				<c:choose>
+					<c:when test="${not empty content.user.profileImageUrl}">
+						<img alt="profile" src="${content.user.profileImageUrl}"
+							class="profile-img-side">
+					</c:when>
+					<c:otherwise>
+						<img alt="profile" src="/image/user.png" class="profile-img-side">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="d-flex justify-content-between w-100">
 				<div>
-					<div class="text-style-15-bold"><a class="userLoginId" href="#">${userLoginId}</a></div>
+					<div class="text-style-15-bold"><a class="userLoginId" href="/user/profile/${userId}">${userLoginId}</a></div>
 				</div>
 			</div>
 		</div>
