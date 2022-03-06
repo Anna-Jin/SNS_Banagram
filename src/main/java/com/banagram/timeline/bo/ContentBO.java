@@ -52,6 +52,9 @@ public class ContentBO {
 			// ContentView 모델에 좋아요 카운팅 집어넣기
 			content.setCountLike(likeBO.countLike(post.getId()));
 			
+			// ContentView 모델에 댓글 카운팅 집어넣기
+			content.setCountComment(commentBO.countCommentByPostId(post.getId()));
+			
 			contentList.add(content);
 		}
 		

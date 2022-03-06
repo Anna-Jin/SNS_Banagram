@@ -82,25 +82,76 @@
 								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
 							</div>
 						</div>
-						<c:forEach items="${content.commentList}" var="comment">
-						<div class="d-flex justify-content-between">
-							<div class="d-flex align-items-cetner">
-								<div class="text-style-15-bold mr-2 mb-1">${comment.user.loginId}</div>
-								<div>${comment.comment.content}</div>
-							</div>
-							<div>
-								<c:if test="${comment.user.loginId eq userLoginId}">
-									<button type="button" class="comment-del-btn mr-1" data-post-id="${content.post.id}" data-comment-id="${comment.comment.id}">
-										<img src="/image/close.png" alt="댓글삭제" width="10">
-									</button>
-								</c:if>
-							</div>
-						</div>	
-						</c:forEach>
-							<div>
-								<%-- 댓글이 1개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
-								<a type="button" id="text-style-14-gray">댓글 n개 모두 보기(구현 중)</a>
-							</div>
+						
+						<%-- 댓글이 2개 이상이면 나머지 댓글을 숨기고 댓글 n개 모두보기 버튼 표시 --%>
+						<%-- 댓글이 1개일 때 --%>
+						<c:choose>
+							<c:when test="${content.countComment eq 1}">
+								<div class="d-flex justify-content-between">
+									<div class="d-flex align-items-cetner">
+										<div class="text-style-15-bold mr-2 mb-1">${content.commentList[0].user.loginId}</div>
+										<div>${content.commentList[0].comment.content}</div>
+									</div>
+									<div>
+										<c:if
+											test="${content.commentList[0].user.loginId eq userLoginId}">
+											<button type="button" class="comment-del-btn mr-1"
+												data-post-id="${content.post.id}"
+												data-comment-id="${content.commentList[0].comment.id}">
+												<img src="/image/close.png" alt="댓글삭제" width="10">
+											</button>
+										</c:if>
+									</div>
+								</div>
+							</c:when>
+
+							<%-- 댓글이 2개 이상일 때 --%>
+							<c:otherwise>
+								<div class="d-flex justify-content-between">
+									<div class="d-flex align-items-cetner">
+										<div class="text-style-15-bold mr-2 mb-1">${content.commentList[0].user.loginId}</div>
+										<div>${content.commentList[0].comment.content}</div>
+									</div>
+									<div>
+										<c:if
+											test="${content.commentList[0].user.loginId eq userLoginId}">
+											<button type="button" class="comment-del-btn mr-1"
+												data-post-id="${content.post.id}"
+												data-comment-id="${content.commentList[0].comment.id}">
+												<img src="/image/close.png" alt="댓글삭제" width="10">
+											</button>
+										</c:if>
+									</div>
+								</div>
+								<div class="more-comment d-none">
+								<c:forEach items="${content.commentList}" var="comment"
+									begin="1">
+									<div class="d-flex justify-content-between">
+										<div class="d-flex align-items-cetner">
+											<div class="text-style-15-bold mr-2 mb-1">${comment.user.loginId}</div>
+											<div>${comment.comment.content}</div>
+										</div>
+										<div>
+											<c:if test="${comment.user.loginId eq userLoginId}">
+												<button type="button" class="comment-del-btn mr-1"
+													data-post-id="${content.post.id}"
+													data-comment-id="${comment.comment.id}">
+													<img src="/image/close.png" alt="댓글삭제" width="10">
+												</button>
+											</c:if>
+										</div>
+									</div>
+								</c:forEach>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<div>
+							<c:if test="${content.countComment > 1}">
+								<a type="button" id="text-style-14-gray" class="more-comment-btn"
+									data-count-comment="${content.countComment}">댓글
+									${content.countComment}개 모두 보기(구현 중)</a>
+							</c:if>
+						</div>
 					</div>
 
 					<%-- 댓글 입력창 --%>
@@ -147,9 +198,9 @@
 $(document).ready(function(e) {
 
 	
-	// 글 내용 더보기 기능
 	$('.post-content').each(function() {
 
+		// 글 내용 더보기 기능
 		let moreBtn = $(this).find('.more');
 		
 		// .post-content를 순회하면서 .context를 찾는다.
@@ -173,6 +224,7 @@ $(document).ready(function(e) {
 			context.html(context_text);
 			$(this).addClass('d-none');
 		});
+		
 	});
 	
 	
@@ -225,6 +277,11 @@ $(document).ready(function(e) {
 		});
 	});
 	
+	// 댓글 더보기
+	$('.more-comment-btn').on('click', function() {
+		$('.more-comment').removeClass('d-none');
+		$(this).addClass('d-none');
+	});
 	
 	// 포스트 좋아요
 	$('.like-btn').on('click', function() {

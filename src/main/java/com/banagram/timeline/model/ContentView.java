@@ -13,7 +13,14 @@ public class ContentView {
 	private User user;
 	private boolean existLike; // 내가 좋아요를 눌렀는 지에 대한 여부
 	private int countLike;
+	private int countComment;
 	
+	public int getCountComment() {
+		return countComment;
+	}
+	public void setCountComment(int countComment) {
+		this.countComment = countComment;
+	}
 	public Post getPost() {
 		return post;
 	}

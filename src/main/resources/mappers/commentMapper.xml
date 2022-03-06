@@ -34,6 +34,14 @@
  		WHERE
  			`postId` = #{postId}
  	</select>
+ 	<select id="countCommentByPostId" parameterType="int" resultType="int">
+ 		SELECT
+ 			COUNT(1)
+ 		FROM 
+ 			`comment`
+ 		WHERE
+ 			`postId` = #{postId}
+ 	</select>
  	<delete id="deleteCommentByPostIdUserIdCommentId" parameterType="map">
  		DELETE FROM `comment`
  		WHERE

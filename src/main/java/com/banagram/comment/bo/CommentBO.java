@@ -45,6 +45,10 @@ public class CommentBO {
 		return resultList;
 	}
 	
+	public int countCommentByPostId(int postId) {
+		return commentDAO.countCommentByPostId(postId);
+	}
+	
 	public int deleteCommentByPostIdUserIdCommentId(int userId, int postId, int commentId) {
 		return commentDAO.deleteCommentByPostIdUserIdCommentId(userId, postId, commentId);
 	}
