@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:forEach items="${profileList}" var="profile">
 <div id="profile-view">
 	<div id="profile-header" class="d-flex justify-content-center">
 		<div class="d-flex justify-content-center w-100">
@@ -88,7 +87,6 @@
 		</c:forEach>
 	</div>
 </div>
-</c:forEach>
 
 <script>
  $(document).ready(function() {

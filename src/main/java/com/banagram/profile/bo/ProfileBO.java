@@ -1,8 +1,5 @@
 package com.banagram.profile.bo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,10 +21,8 @@ public class ProfileBO {
 	private FollowBO followBO;
 
 	
-	public List<Profile> generateProfileList(int currentId) {
+	public Profile generateProfileList(int currentId) {
 		// 프로필 리스트 객체를 만든다.
-		List<Profile> profileList = new ArrayList<>();
-		
 		Profile profile = new Profile();
 		
 		// userList에서 currentId에 맞는 user를 가져온다.
@@ -47,8 +42,7 @@ public class ProfileBO {
 
 		
 		// profileList에 add한다.
-		profileList.add(profile);
 		
-		return profileList;
+		return profile;
 	}
 }

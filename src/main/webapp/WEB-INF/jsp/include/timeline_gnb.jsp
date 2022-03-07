@@ -35,10 +35,6 @@
 							aria-expanded="false">
 							<img src="${profileImageUrl}" alt="main_icon" class="nav-icon">
 						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item hr" href="../user/profile">프로필</a></li>
-							<li><a class="dropdown-item text-danger" href="/user/logout">로그아웃</a></li>
-						</ul>
 	 				</c:when>
 	 				<c:otherwise>
 						<button class="dropdown-toggle" type="button"
@@ -46,13 +42,13 @@
 							aria-expanded="false">
 							<img src="/image/user.png" alt="main_icon" class="nav-icon">
 						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item hr" href="../user/profile">프로필</a></li>
-							<li><a class="dropdown-item text-danger" href="/user/logout">로그아웃</a></li>
-						</ul>
 	 				</c:otherwise>	
 	 			</c:choose>
-	 		</c:if>	
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+					<li><a class="dropdown-item hr" href="/profile/${userId}">프로필</a></li>
+					<li><a class="dropdown-item text-danger" href="/user/logout">로그아웃</a></li>
+				</ul>
+			</c:if>	
  		</div>
  	</div>
 </div>

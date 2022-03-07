@@ -1,7 +1,5 @@
 package com.banagram.profile;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -41,9 +39,9 @@ public class ProfileController {
 		}
 		
 		// profileBO 불러오기
-		List<Profile> profileList = profileBO.generateProfileList(currentId);
+		Profile profile = profileBO.generateProfileList(currentId);
 		
-		model.addAttribute("profileList", profileList);
+		model.addAttribute("profile", profile);
 		model.addAttribute("viewPath", "user/profile");
 		
 		return "template/timeline_layout";
