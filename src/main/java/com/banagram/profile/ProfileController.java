@@ -1,8 +1,5 @@
 package com.banagram.profile;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,15 +25,7 @@ public class ProfileController {
 	@RequestMapping("/profile/{currentId}")
 	public String profile(
 			@PathVariable("currentId") int currentId,
-			Model model,
-			HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		Integer userId = (Integer)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
-		if (userId == null || userLoginId == null) {
-			return "redirect:user/login-view";
-		}
+			Model model) {
 		
 		// profileBO 불러오기
 		Profile profile = profileBO.generateProfileList(currentId);

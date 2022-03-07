@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.banagram.common.EncryptUtils;
 import com.banagram.user.bo.UserBO;
@@ -125,6 +126,36 @@ public class UserRestController {
 		} else {
 			result.put("errorMessage", "존재하지 않는 사용자입니다. 관리자에게 문의해주세요.");
 		}
+		
+		return result;
+	}
+	
+	/**
+	 * 프로필 수정
+	 * @param id
+	 * @param email
+	 * @param name
+	 * @param loginId
+	 * @param file
+	 * @param introduce
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/profile")
+	public Map<String, Object> update(
+			@RequestParam("id") int id,
+			@RequestParam("email") String email,
+			@RequestParam("name") String name,
+			@RequestParam("loginId") String loginId,
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			@RequestParam(value = "introduce", required = false) String introduce,
+			HttpServletRequest request
+			) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("result", "success");
+		
 		
 		return result;
 	}

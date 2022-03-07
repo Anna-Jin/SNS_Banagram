@@ -25,10 +25,6 @@ public class TimelineContorller {
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
-		if (userId == null || userLoginId == null) {
-			return "redirect:user/login-view";
-		}
 		
 		// 하나의 카드 -> contentView객체 (view용 객체)
 		List<ContentView> contentList = contentBO.generateContentViewList(userId);

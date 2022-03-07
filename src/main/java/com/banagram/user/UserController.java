@@ -57,6 +57,12 @@ public class UserController {
 		return "redirect:/user/login-view";
 	}
 	
+	/**
+	 * 글 수정 화면
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/profile/edit")
 	public String update(
 			Model model,
@@ -65,10 +71,6 @@ public class UserController {
 		// 로그인 권한 검사
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
-		String userLoginId = (String)session.getAttribute("userLoginId");
-		if (userId == null || userLoginId == null) {
-			return "redirect:user/login-view";
-		}
 		
 		Profile profile = profileBO.generateProfileList(userId);
 		
