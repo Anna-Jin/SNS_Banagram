@@ -13,9 +13,9 @@ server:
   port: 80
   servlet:
     session:
-      timeout: 43200m      # 60m * 24h * 30d
+      timeout: 60m      # 60m * 24h * 30d
       cookie:
-        max-age: 43200m    # 60m * 24h * 30d
+        max-age: 60m    # 60m * 24h * 30d
         name: SID
         http-only: true
         secure: true
