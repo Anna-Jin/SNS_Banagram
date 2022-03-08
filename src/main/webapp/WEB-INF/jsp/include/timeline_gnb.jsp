@@ -12,7 +12,7 @@
  	<div class="icon-box">
  		<%-- 타임라인 버튼 --%>
  		<div class="h-100 d-flex align-items-center mr-3">
- 			<a href="/timeline"><img src="/image/main_full.png" alt="main_icon" class="nav-icon"></a>
+ 			<a href="/timeline" id="timeline-btn"><img src="/image/main.png" alt="main_icon" class="nav-icon"></a>
  		</div>
  		<%-- 글쓰기 버튼 --%>
  		<div class="h-100 d-flex align-items-center mr-3">
