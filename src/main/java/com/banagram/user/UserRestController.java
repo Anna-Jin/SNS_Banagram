@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import com.banagram.user.model.User;
 @RestController
 @RequestMapping("/user")
 public class UserRestController {
+	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
 	private UserBO userBO;
@@ -130,20 +134,9 @@ public class UserRestController {
 		return result;
 	}
 	
-	/**
-	 * 프로필 수정
-	 * @param id
-	 * @param email
-	 * @param name
-	 * @param loginId
-	 * @param file
-	 * @param introduce
-	 * @param request
-	 * @return
-	 */
-	@PostMapping("/profile")
+	
+	@PostMapping("/update")
 	public Map<String, Object> update(
-			@RequestParam("id") int id,
 			@RequestParam("email") String email,
 			@RequestParam("name") String name,
 			@RequestParam("loginId") String loginId,
@@ -152,10 +145,22 @@ public class UserRestController {
 			HttpServletRequest request
 			) {
 		
-		Map<String, Object> result = new HashMap<>();
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
 		
+		
+		Map<String, Object> result = new HashMap<>();
 		result.put("result", "success");
 		
+		// userBO.update호출
+		int row = userBO.updateUser(userId, userLoginId, email, name, loginId, file, introduce);
+		if (row < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "프로필 수정에 실패했습니다.");
+		}
+		
+		logger.error("[profile update] 프로필 업데이트");
 		
 		return result;
 	}

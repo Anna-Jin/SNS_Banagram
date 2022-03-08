@@ -70,4 +70,15 @@
 		WHERE
 			`id` = #{id}
  	</select>
+ 	<update id="updateUser" parameterType="map">
+ 		UPDATE `user`
+ 		SET
+ 			`email` = #{email}
+ 			, `name` = #{name}
+ 			, `loginId` = #{loginId}
+ 			<if test="imagePath != null">, `profileImageUrl` = #{imagePath}</if>
+ 			<if test="introduce != null">, `introduce` = #{introduce}</if>
+ 		WHERE
+ 			`id` = #{id}
+ 	</update>
  </mapper>

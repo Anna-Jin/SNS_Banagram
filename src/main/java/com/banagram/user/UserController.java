@@ -50,9 +50,10 @@ public class UserController {
 	 */
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request) {
-		request.removeAttribute("userLoginId");
-		request.removeAttribute("userName");
-		request.removeAttribute("userId");
+		HttpSession session = request.getSession();
+		session.removeAttribute("userLoginId");
+		session.removeAttribute("userName");
+		session.removeAttribute("userId");
 		
 		return "redirect:/user/login-view";
 	}

@@ -55,7 +55,7 @@
 				</div>
 				<%-- 제출 버튼 --%>
 				<div class="ml-3">
-					<button type="button" class="btn btn-primary" id="edit-profile-btn">제출</button>
+					<button type="button" class="btn btn-primary" id="edit-profile-btn" data-user-id="${userId}">제출</button>
 				</div>
 			</div>
 		</div>
@@ -136,6 +136,9 @@ $(document).ready(function() {
 			}
 		}
 		// 폼태그 객체를 JS에서 만든다. 파일을 업로드하려면 폼태그가 반드시 있어야한다.
+		
+		let userId = $(this).data('user-id');
+		
 		let formData = new FormData();
 		
 		formData.append('email', email);
@@ -149,16 +152,16 @@ $(document).ready(function() {
 		// ajax
 		$.ajax({
 			type: "POST"
-			, url: "/user/profile"
+			, url: "/user/update"
 			, data: formData
 			, enctype: "multipart/form-data" 	// 파일 업로드를 위한 필수 설정
 			, processData: false				// 파일 업로드를 위한 필수 설정
 			, contentType: false				// 파일 업로드를 위한 필수 설정
 			, success: function(data) {
 				if (data.result == 'success') {
-					location.href = "/user/profile/" + userId
+					location.href = "/profile/" + userId
 				} else {
-					alert(data.errorMessage);
+					alert("프로필 수정 실패");
 				}
 			}
 			, error: function(e) {

@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.banagram.timeline.bo.ContentBO;
 import com.banagram.timeline.model.ContentView;
+import com.banagram.user.bo.UserBO;
+import com.banagram.user.model.User;
 
 @Controller
 public class TimelineContorller {
 	
 	@Autowired
 	private ContentBO contentBO;
+	
+	@Autowired
+	private UserBO userBO;
 
 	
 	@RequestMapping("/timeline")
@@ -28,9 +33,10 @@ public class TimelineContorller {
 		
 		// 하나의 카드 -> contentView객체 (view용 객체)
 		List<ContentView> contentList = contentBO.generateContentViewList(userId);
+		User user = userBO.getUserByUserId(userId);
 		
 		
-		// model.addAttribute("postList", postList);
+		model.addAttribute("user", user);
 		model.addAttribute("contentList", contentList);
 		model.addAttribute("viewPath", "timeline/timeline");
 		

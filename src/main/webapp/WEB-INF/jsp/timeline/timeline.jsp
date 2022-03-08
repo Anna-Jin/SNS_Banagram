@@ -24,7 +24,7 @@
 						<div class="">
 							<%-- 사용자 아이디 클릭하면 프로필로 이동 --%>
 							<div>
-								<div class="text-style-15-bold"><a class="userLoginId" href="/profile/${content.user.id}">${content.post.userLoginId}</a></div>
+								<div class="text-style-15-bold"><a class="userLoginId" href="/profile/${content.user.id}">${content.user.loginId}</a></div>
 							</div>
 						</div>	
 						<div class="col-1" id="post-del-btn">
@@ -75,7 +75,7 @@
 					<div class="post-content">
 						<div class="text-style-15-bold mb-2 mt-2">좋아요 ${content.countLike}개</div>
 						<div class="d-flex">
-							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="profile/${content.user.id}">${content.post.userLoginId}</a></div>
+							<div class="text-style-15-bold mr-2 mb-1"><a class="userLoginId" href="profile/${content.user.id}">${content.user.loginId}</a></div>
 							<div class="context">${content.post.content}</div>
 							<div class="d-flex">
 								<a type="button" class="more d-none" data-content-id="${content.post.id}">더보기</a>
@@ -168,8 +168,8 @@
 			<div>
 				<%-- 프로필 이미지를 받아와서 프로필 이미지가 없으면 기본 이미지 노출 --%>
 				<c:choose>
-					<c:when test="${not empty content.user.profileImageUrl}">
-						<img alt="profile" src="${content.user.profileImageUrl}"
+					<c:when test="${not empty user.profileImageUrl}">
+						<img alt="profile" src="${user.profileImageUrl}"
 							class="profile-img-side">
 					</c:when>
 					<c:otherwise>
@@ -179,7 +179,7 @@
 			</div>
 			<div class="d-flex justify-content-between w-100">
 				<div>
-					<div class="text-style-15-bold"><a class="userLoginId" href="/profile/${userId}">${userLoginId}</a></div>
+					<div class="text-style-15-bold"><a class="userLoginId" href="/profile/${userId}">${user.loginId}</a></div>
 				</div>
 			</div>
 		</div>
