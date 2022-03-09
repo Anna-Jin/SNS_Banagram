@@ -112,7 +112,7 @@
 				, data: formData
 				, enctype: "multipart/form-data"   	// 파일 업로드를 위한 필수 설정
 				, processData: false   				// 파일 업로드를 위한 필수 설정
-				, contentType: false
+				, contentType: "application/x-www-form-urlencoded; charset=UTF-8"
 				, success: function(data) {
 					if (data.result == 'success') {
 						location.href = "/timeline"
